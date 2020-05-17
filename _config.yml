@@ -1,0 +1,20 @@
+title: "HTeuMeuLeu.com"
+url: "https://www.hteumeuleu.com"
+markdown: GFM
+
+defaults:
+  - scope:
+      path: ""
+      type: "posts"
+    values:
+      layout: "post"
+
+permalink: /:title/
+
+plugins:
+  - jekyll-mentions
+
+exclude: ["Gemfile", "Gemfile.lock", "CONTRIBUTING.md", "LICENSE", "README.md"]
+include: ["_pages"]
+
+#incremental: true

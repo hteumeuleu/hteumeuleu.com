@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8" />
+	<title>{{ site.title | escape_once | markdownify | strip_html | strip }}</title>
+	<link rel="stylesheet" href="/assets/css/styles.css" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<meta property="og:type" content="website" />
+	<meta property="og:url" content="{{ site.url }}{{ page.url }}" />
+	<meta http-equiv="content-security-policy" content="script-src 'self' 'unsafe-inline' https://www.google-analytics.com; base-uri 'self';" />
+</head>
+<body>
+	<div class="page{{ page.name | split: '.' | first | slugify | default: 'default' | prepend: ' page--' }}">
+		<main class="main" role="main">
+			{{ content }}
+			{% for post in site.posts limit:5 %}
+			<li><a href="{{ post.url }}">{{ post.title | markdownify | remove: ' class="language-plaintext highlighter-rouge"' | remove: '<p>' | remove: '</p>' | strip }}</a>, {{ post.date | date: '%B %d, %Y' }}</li>
+			{% endfor %}
+		</main>
+	</div>
+</body>
+</html>
