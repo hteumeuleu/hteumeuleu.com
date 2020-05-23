@@ -9,7 +9,7 @@ defaults:
     values:
       layout: "post"
 
-permalink: /:title/
+permalink: /:year/:title/
 
 plugins:
   - jekyll-mentions
