@@ -1,6 +1,9 @@
 ---
 ---
-@import "_functions";
-@import "_variables";
+@charset "UTF-8";
 
-@import "main";
+@import "_mixins.scss";
+@import "_fonts.scss";
+@import "_reset.scss";
+@import "_common.scss";
+@import "_post.scss";

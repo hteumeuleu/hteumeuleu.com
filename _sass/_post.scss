@@ -1,0 +1,68 @@
+.post {
+	font-size: rem(20px);
+
+	& > * {
+		margin-bottom: rem(16px);
+	}
+
+	h2:not(:first-child) {
+		margin-top: rem(48px);
+	}
+
+	h3:not(:first-child) {
+		margin-top: rem(32px);
+	}
+
+	ul, ol {
+		margin-top: rem(32px);
+		margin-bottom: rem(32px);
+		padding-left: rem(16px);
+	}
+
+	li:not(:last-child) {
+		margin-bottom: rem(8px);
+	}
+
+	code {
+		padding: rem(2px) rem(4px);
+		background-color: rgba(0, 0, 0, 0.05);
+	}
+
+	pre code {
+		display: block;
+		padding: rem(16px);
+		line-height: 1.4;
+	}
+
+	img {
+		display: block;
+		max-width: 100%;
+		height: auto;
+	}
+
+	.figure--large {
+		width: 100vw;
+		max-width: rem(1242px);
+		padding-right: rem(26px);
+	}
+
+	figure {
+		margin-top: rem(48px);
+		margin-bottom: rem(48px);
+	}
+
+	figcaption {
+		margin-top: rem(8px);
+		margin-bottom: rem(8px);
+	}
+}
+
+.post-header {
+	margin-bottom: rem(48px);
+}
+
+.post-title {
+	line-height: 1;
+	margin-top: 0.25em;
+	margin-bottom: 0.25em;
+}
