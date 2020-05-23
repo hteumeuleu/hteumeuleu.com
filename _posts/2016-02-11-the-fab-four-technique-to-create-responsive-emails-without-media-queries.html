@@ -1,0 +1,177 @@
+---
+layout: post
+title:  "The Fab Four Technique to create Responsive Emails without Media Queries"
+date:   2016-02-11 18:34:38 +0200
+---
+<p>
+	I think I found a new way to create responsive emails, without media queries. The solution involves the CSS <code>calc()</code> function and the three
+	<code>width</code>, <code>min-width</code> and <code>max-width</code> properties.
+</p>
+<p>Or as I like to call them all together: the Fab Four (in CSS).</p>
+<figure class="figure--large">
+	<img alt="" width="1366" height="768" src="/uploads/2016/02/1*8MfWNObJP1mFnYJzKkdflQ.png" />
+	<figcaption>calc() &amp; width &amp; min-width &amp; max-width, aka The Fab Four (in CSS).</figcaption>
+</figure>
+<h2>The problem</h2>
+<p>
+	Making responsive emails is hard, especially since email clients on mobile (like Gmail, Yahoo or Outlook.com) don’t support media queries. An
+	<a href="http://labs.actionrocket.co/the-hybrid-coding-approach" data-href="http://labs.actionrocket.co/the-hybrid-coding-approach" rel="noopener">hybrid approach</a>, a
+	<a href="https://julie.io/writing/gmail-first-strategy-for-responsive-emails/" rel="noopener">Gmail first strategy</a>, or
+	<a href="http://webdesign.tutsplus.com/tutorials/creating-a-future-proof-responsive-email-without-media-queries--cms-23919" rel="noopener">a responsive email without media queries</a> are great ways to adapt to this situation.
+</p>
+<p>
+	That last approach has been my favorite so far. The big idea is to have columns as <code>&lt;div&gt;</code>s with a fixed width aligned with “
+	<code>display:inline-block</code>. Once a screen can no longer contain two blocks side by side, they will naturally flow below each other. But I’ve always had a problem with this.
+</p>
+<p>Once all the blocks are stacked, they don’t take the full width of the email.</p>
+<figure>
+	<img alt="" width="1247" height="494" src="/uploads/2016/02/1*ybAI7RS4xjmQY3Y_B4jUnw.png" />
+	<figcaption>
+		Without media queries, columns can stack up but not grow full width.
+		<a href="http://webdesign.tutsplus.com/tutorials/creating-a-future-proof-responsive-email-without-media-queries--cms-23919">Illustration by Nicole Merlin</a>.
+	</figcaption>
+</figure>
+<p>
+	I’ve been looking for ways to solve this problem for a long time. Flexbox is a great contender, but unfortunately <a href="https://medium.com/@hteumeuleu/using-flexbox-in-an-email-4b1aa7a69886#.83apq23wx">Flexbox support in an email</a> is abysmal.
+</p>
+<h2>A solution</h2>
+<h3>
+		Remembering <code>width</code>, <code>min-width</code> and <code>max-width</code>
+</h3>
+<p>
+	On top of the <code>calc()</code> function, the solution I found involves these three CSS properties. In order to fully understand how it works, here’s a reminder of how
+	<code>width</code>, <code>min-width</code> and <code>max-width</code> behave when used together (as
+	<a href="http://goetter.tumblr.com/post/64119638003/quiz-parce-que-la-taille-%C3%A7a-compte">clearly summarized</a> by fellow french front-end developer Raphaël Goetter).
+</p>
+<ul>
+	<li>
+		If the <code>width</code> value is greater than the <code>max-width</code> value, <code>max-width</code> wins.
+	</li>
+	<li>
+		If the <code>min-width</code> value is greater than the <code>width</code> or <code>max-width</code> values,
+			<code>min-width</code> wins.
+	</li>
+</ul>
+<p>Can guess what the width of a box with the following styles would be ?</p>
+
+<figure>
+<pre><code>.box {<br>    width:320px;<br>    min-width:480px;<br>    max-width:160px;<br>}</code></pre>
+<figcaption>
+<p>(Answer : the box would be 480px wide.)</p>
+</figcaption>
+</figure>
+
+
+<h3>Introducing <code>calc()</code> and the magic formula</h3>
+
+<p>Without further ado, here is an example of the Fab Four to create two columns that will stack and grow below 480px.</p>
+
+<pre><code>.block {<br>    display:inline-block;<br>    min-width:50%;<br>    max-width:100%;<br>    width:calc((480px — 100%) * 480);<br>}</code></pre>
+
+<p>Let’s break it down for each <code>width</code> property.</p>
+
+<pre><code>min-width:50%;</code></pre>
+
+<p>
+	The <code>min-width</code> property defines our column widths on what we could call our desktop version. We can change this value to add more columns (for example, 25% for a four columns
+		layout), or set columns with fixed pixel widths.
+</p>
+<pre><code>max-width:100%;</code></pre>
+<p>
+	The <code>max-width</code> property defines our column widths on what we could call our mobile version. At 100%, each column will grow and adapt to the full width of their parent container. We can change this value to keep columns on mobile (for example, 50% for a two columns layout).
+</p>
+<pre><code>width:calc((480px — 100%) * 480);</code></pre>
+<p>
+	Thanks to the <code>calc()</code> function, the <code>width</code> property is where the magic happens. The <code>480</code> value matches our desired breakpoint value. The 100% corresponds to the width of the parent container of our columns. The goal of this calculation is to create a value bigger than our <code>max-width</code> or smaller than our <code>min-width</code>, so that either one of those property is applied instead.
+</p>
+<p>Here are two examples.</p>
+<figure>
+	<img alt="" width="700" height="200" src="/uploads/2016/02/1*zCzf5ZChfB1WB5FGULzpig.png" />
+</figure>
+<p>
+	With a parent of 500px, the calculated <code>width</code> equals -9600px. It is smaller than the min-width. So the min-width of 50% wins. Thus we have a two columns layout.
+</p>
+<figure>
+	<img alt="" width="700" height="200" src="/uploads/2016/02/1*PJANsECXH1VCJ5UxxaJ-5w.png" />
+</figure>
+<p>
+	With a parent of 400px, the calculated <code>width</code> equals 38400px. It is bigger than the min-width, but max-width is smaller. So the max-width of 100% wins. Thus we have a one column layout.
+</p>
+<h2>Demo</h2>
+<p>
+	Here is a demo of what this technique can do. <br />
+	You can <a href="http://emails.hteumeuleu.fr/wp-content/uploads/2016/02/the-fab-four.html">see the full demo online here</a> (or <a href="https://litmus.com/builder/9c0fce1">on Litmus Builder</a> or <a href="http://codepen.io/hteumeuleu/pen/VaZgqg">on CodePen</a>).
+</p>
+<figure class="figure--large">
+	<img alt="" width="800" height="512" src="/uploads/2016/02/1*YcVo7AGzJekmg5eupqLK0A.png" />
+	<figcaption>
+			Illustrations by
+			<a href="https://dribbble.com/shots/2012203-Paul-George" data-href="https://dribbble.com/shots/2012203-Paul-George" rel="noopener">Elias Stein</a>
+	</figcaption>
+</figure>
+<p>And here are two screenshots of this demo in Gmail, on the desktop webmail and on the mobile app on iOS. Same code, different render.</p>
+<figure>
+	<img alt="" width="1440" height="900" src="/uploads/2016/02/1*GUknMjQDihG2WkqHIEBBUA.png" />
+	<figcaption>The Fab Four demo as seen on the Gmail desktop webmail and on the Gmail iOS app.</figcaption>
+</figure>
+<p>
+	In this demo, I’ve set a few examples of different grids (with two, three, four columns). The first grid, with the images, is built to go from four columns on desktop to two columns on mobile. The other grids are built to grow full width on mobile.
+</p>
+<p>
+	Also, notice how the title switches from a left aligned position on desktop to a centered position on mobile. This is achieved by giving the title a fixed width of 190px and a <code>margin:0 auto;</code> to center it. On desktop, the title’s parent container has a min-width of 190px applied, so the logo stays on the left. On mobile, the parent container grows full width, so the logo becomes centered.
+</p>
+<p>
+	A great aspect of this technique is that, since everything is based on the grid’s parent width, an email can adapt even on a desktop webmail. For example, on Outlook.com, no matter if you chose to have the reading pane on the bottom or on the right, the email will correctly responds to the reading pane’s width. This would be impossible to do with media queries.
+</p>
+<figure>
+	<img alt="" width="2068" height="768" src="/uploads/2016/02/1*lbGOlHr5J-I2XSlbLrfQCg.png" />
+	<figcaption>On Outlook.com, the email adapts to the different views.</figcaption>
+</figure>
+<h2>Support</h2>
+<p>
+	In browsers, <code>calc()</code> is <a href="http://caniuse.com/#search=calc%28%29" data-href="http://caniuse.com/#search=calc()" rel="noopener">well supported since IE9</a>. Turns out, <code>calc()</code> also has a pretty good support in email clients. It works in Apple Mail (on iOS and OS X), Thunderbird, Outlook (iOS and Android apps), Gmail (webmail, iOS and Android apps), AOL (webmail), and the old Outlook.com (still present in Europe).
+</p>
+<h3>The old Outlook.com</h3>
+<p>
+	Outlook.com has one small quirk, though. The webmail will filter every property with a <code>calc()</code> that includes any parenthesis. This means that <code>calc(480px - 100%)</code> is supported, but <code>calc((480px - 100%) * 480)</code> is not. Since my initial formula involves parenthesis, we need to refactor it to avoid parenthesis. So the formula to support the old Outlook.com looks like this.
+</p>
+<pre><code>width:calc(480px * 480 — 100% * 480);</code></pre>
+<h3>Unsupported clients</h3>
+<p>
+	Of course, <code>calc()</code> isn’t supported in old email clients like Lotus Notes, or the latest Outlook for Windows (using Word’s HTML rendering engine). It also won’t work on Outlook Web App (both Office 365 and the new Outlook.com) and Yahoo (webmail, iOS and Android apps). These two will strip out any property involving a <code>calc()</code>.
+</p>
+<h3>Fallbacks</h3>
+<p>
+	In these cases, I would suggest duplicating all involved properties with fixed width values for clients that don’t support <code>calc()</code>. In order to hide The Fab Four from those clients, I advise to use <code>calc()</code> functions, even if it’s not technically useful. Our first example would look like the following.
+</p>
+<pre><code>.block {<br>    display:inline-block;<br>    min-width:240px;<br>    width:50%;<br>    max-width:100%;<br>    min-width:calc(50%);<br>    width:calc(480px * 480 — 100% * 480);<br>}</code></pre>
+<h3>Outlook Web App</h3>
+<p>
+	However, Outlook Web App (both Office 365 and the new Outlook.com) has one more quirk of its own. When a <code>calc()</code> function contains a multiplication (with the <code>*</code> character), the new Outlook.com and Office 365 will remove the whole inline <code>style</code> attribute corresponding. This means we need to calculate the multiplications by hand and only keep the resulting substraction. Here’s what the final calculation looks like for a 480px breakpoint.
+</p>
+<pre><code>width:calc(230400px — 48000%);</code></pre>
+<h3>WebKit Prefixes</h3>
+<p>
+	Older versions of Android (before Android 5.0) or iOS (before iOS 7) require <code>-webkit-</code> prefixes in order to work. Our final version looks like the following.
+</p>
+<pre><code>.block {<br>    display:inline-block;<br>    min-width:240px;<br>    width:50%;<br>    max-width:100%;<br>    min-width:-webkit-calc(50%);<br>    min-width:calc(50%);<br>    width:-webkit-calc(230400px — 48000%);<br>    width:calc(230400px — 48000%);<br>}</code></pre>
+<h2>Shortcomings and final thoughts</h2>
+<p>Like anything in the email development world, the Fab Four technique isn’t perfect. Here are a few limitations that I can think of:</p>
+<ul>
+	<li>
+		It won’t work on Yahoo. The desktop version of its webmail supports media queries, though. So we could improve things a bit by making a mobile first version of our email, and then enhancing it on desktop with media queries.
+	</li>
+	<li>
+		You can only set one breakpoint. This might not be such a problem for emails though, as designs rarely go beyond 600px on desktop and don’t require more than one breakpoint to adapt on mobile.
+	</li>
+	<li>
+		You can only diminish the number of columns from a desktop version to a mobile version. While this rarely happens, you couldn’t go from a four columns layout on mobile to a single column layout on desktop.
+	</li>
+	<li>
+		The final version of the calculation (to support the old Outlook.com and degrade gracefully on the new one) is hard to read. Using a preprocessor and a mixin to generate all the required properties could be more than helpful.
+	</li>
+</ul>
+<p>
+	I still think that this technique will come in very handy in a lot of cases, especially for Gmail optimizations. I’m sure there is also use cases for websites (like widgets, ads, …).
+</p>
+<p>And I can’t wait to see what this will inspire you to create.</p>
