@@ -18,6 +18,6 @@ sass:
   style: compressed
 
 exclude: ["Gemfile", "Gemfile.lock", "CONTRIBUTING.md", "LICENSE", "README.md"]
-include: ["_pages"]
+include: ["_pages", "_redirects"]
 
 #incremental: true
