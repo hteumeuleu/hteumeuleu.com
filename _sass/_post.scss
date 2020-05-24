@@ -5,6 +5,15 @@
 		margin-bottom: rem(16px);
 	}
 
+	hr {
+		margin: rem(48px) 0;
+		width: 8ch;
+		max-width: 100%;
+		height: 1px;
+		border: none;
+		background-color: currentColor;
+	}
+
 	h2:not(:first-child) {
 		margin-top: rem(48px);
 	}
@@ -32,6 +41,7 @@
 		display: block;
 		padding: rem(16px);
 		line-height: 1.4;
+		overflow: auto;
 	}
 
 	img {
@@ -62,7 +72,13 @@
 }
 
 .post-title {
+	font-size: rem(40px);
 	line-height: 1;
 	margin-top: 0.25em;
 	margin-bottom: 0.25em;
+}
+
+.post-subtitle {
+	font-size: rem(24px);
+	color: rgba(0, 0, 0, 0.54);
 }

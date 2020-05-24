@@ -1,0 +1,87 @@
+---
+title:  "Interactive Animation in HTML Email"
+date:   2019-06-14 09:16:13 +0200
+---
+<p>Last month, <a href="https://panic.com/" rel="noopener" target="_blank">Panic</a> announced <a href="https://play.date/" rel="noopener" target="_blank"><strong>Playdate</strong></a>, an adorable handeld gaming system with a black and white screen. And a crank. Yup. I’ve been a pretty big fan of Panic for a long time now, from <a href="https://panic.com/coda/" rel="noopener" target="_blank">Coda</a> to Steven Frank’s <a href="https://www.stevenf.com/books/" rel="noopener" target="_blank">How to Count</a> to <a href="https://cdn-images-1.medium.com/max/1600/1*Exsw2CcSJLefAafn2jN1Uw.gif" rel="noopener" target="_blank">one of my favorite t-shirt ever</a> to <a href="http://www.firewatchgame.com/" rel="noopener" target="_blank">Firewatch</a>. And <a href="https://www.play.date" rel="noopener" target="_blank">their teaser page</a> is really stunning, with an interactive 3D model of the console you can manipulate in your browser.</p>
+<p>This inspired to make a little something based on an old experiment I did three years ago for a client. Without further ado, here’s an interactive animation experiment in an HTML email that <strong>works in Apple Mail, Gmail, Outlook.com, Yahoo! Mail</strong> and a bunch of other email clients.</p>
+
+<figure>
+  <img src="https://cdn-images-1.medium.com/max/800/1*D4OfNHkm1q4XbUc2a9LwNQ.jpeg">
+</figure>
+
+<p>Here’s how I did it.</p>
+
+<h2>My first attempt with the label-to-input hack</h2>
+
+<p>It all started three years ago when I discovered a bit of an oddity in the CSS world thanks to <a href="https://codepen.io/vincent-valentin/details/vGWJKr" rel="noopener" target="_blank">a demo</a> by fellow french developer <a href="https://twitter.com/htmlvv" rel="noopener" target="_blank">Vincent Valentin</a>.</p>
+
+<figure>
+  <img src="https://cdn-images-1.medium.com/max/1200/1*DnAkihGFaOz3urtJFiQcwQ.gif">
+</figure>
+
+<p>In CSS, hovering a cursor over a <code>&lt;label&gt;</code> will also trigger <code>:hover</code> for its associated input. It’s pretty much written as such <a href="https://drafts.csswg.org/selectors-4/#the-hover-pseudo" rel="noopener" target="_blank">in the Selectors Level 4 specification</a>:</p>
+
+<blockquote>[HTML5] defines a labeled control element as matching <code><em>:hover</em></code> when its label is hovered.</blockquote>
+
+<p>That may not sound like a big deal, but this is one of the rare case in CSS where one element can trigger styles on one of its previous element (parent or sibling) in HTML. Developer Roman Komarov has a great write-up on this in his <a href="https://www.kizu.ru/label-to-input/" rel="noopener" target="_blank">Label-to-Input States</a> article.</p>
+<p>And so I went on to use this technique to try to recreate a 3D rotating model of a shoe we were using for a client on the web. The idea was to use multiple screenshots of the 3D model at multiple angles. Because <a href="https://www.play.date" rel="noopener" target="_blank">Playdate’s website</a> is nicely coded and readable, I was able to use the 3D model featured on their page. By simply using the <code>gameViewer.setRotation(x, y)</code> function they have on their scripts in my browser’s console, I made a loop to rotate the model at different intervals. Here’s the code I used. Try to paste it in your browser JavaScript console on Playdate’s website and see the model rotate (at the middle of the page).</p>
+
+<pre><code>var x = 0;<br>var xStep = 360 / 16 * -1;<br>setInterval(function() {<br> x += xStep;<br> gameViewer.setRotation(15, x);<br>}, 500);</code></pre>
+
+<p>My HTML code would then have a row of multiple labels next to each others. And then, using the aforementioned label-to-input hack, I’d change the background image of another element when hovering each label. Here’s what it would look like with just a few labels.</p>
+
+<pre><code>&lt;input type=&quot;checkbox&quot; id=&quot;checkbox1&quot; class=&quot;checkbox&quot; /&gt;<br>&lt;input type=&quot;checkbox&quot; id=&quot;checkbox2&quot; class=&quot;checkbox&quot; /&gt;<br>&lt;input type=&quot;checkbox&quot; id=&quot;checkbox3&quot; class=&quot;checkbox&quot; /&gt;<br>&lt;div class=&quot;image&quot;&gt;<br> &lt;label class=&quot;label&quot; for=&quot;checkbox1&quot;&gt;&lt;/label&gt;<br> &lt;label class=&quot;label&quot; for=&quot;checkbox2&quot;&gt;&lt;/label&gt;<br> &lt;label class=&quot;label&quot; for=&quot;checkbox3&quot;&gt;&lt;/label&gt;<br>&lt;/div&gt;</code></pre>
+
+<p>The basic styles to set up the image container and the labels row would look something like this.</p>
+
+<pre><code>.image {<br> display: table;<br> width: 640px;<br> background-image: url(image0.jpg);<br>}<br />
+.label {<br> display: table-cell;<br> height: 320px;<br>}</code></pre>
+
+<p>And then here’s where the <em>magic</em> really happens. Using the adjacent selector <code>~</code> in CSS, we can target the image container following each checkbox being hovered. And thus we can apply different images.</p>
+
+<pre><code>#checkbox1:hover ~ .image {<br> background-image: url(image1.jpg);<br>}<br />#checkbox2:hover ~ .image {<br> background-image: url(image2.jpg);<br>}<br />#checkbox3:hover ~ .image {<br> background-image: url(image3.jpg);<br>}</code></pre>
+
+<p>The result worked great in Apple Mail and even on the desktop webmail of Gmail. But it didn’t work in Outlook.com because the webmail doesn’t support the adjacent selector. And it didn’t work in Yahoo Mail because the webmail prefixes <code>id</code> attributes, but not <code>for</code> attributes, thus breaking the association between the label and input.</p><p>This made realize, however, that the <code>:hover</code> pseudo selector has great support on all those email clients. So I kept wondering if there was another way to make this work on more email clients. (Spoiler: there totally is.)</p>
+
+<h2>A solution with only :hover</h2>
+
+<p>Using only <code>:hover</code> to display different images meant I needed to find a way to display the triggering “labels” next to each others, all while maintaining the changing image at the exact same position. And the solution came from a mix of <code>float</code> ing elements and <a href="https://www.gorebel.com/blog/absolute-positioning-in-email" rel="noopener" target="_blank">an article by Mark Robbins</a> explaining how to fake <code>position:absolute</code> in emails.</p>
+
+<p>Here’s an example of the HTML to represent of few frames of the animation.</p>
+
+<pre><code>&lt;div class=&quot;frames&quot;&gt;<br> &lt;div class=&quot;frame&quot;&gt;<br>  &lt;div class=&quot;toggler&quot;&gt;&lt;/div&gt;<br>  &lt;div class=&quot;image image1&quot;&gt;&lt;/div&gt;<br> &lt;/div&gt;<br> &lt;div class=&quot;frame&quot;&gt;<br>  &lt;div class=&quot;toggler&quot;&gt;&lt;/div&gt;<br>  &lt;div class=&quot;image image2&quot;&gt;&lt;/div&gt;<br> &lt;/div&gt;<br> &lt;div class=&quot;frame&quot;&gt;<br>  &lt;div class=&quot;toggler&quot;&gt;&lt;/div&gt;<br>  &lt;div class=&quot;image image3&quot;&gt;&lt;/div&gt;<br> &lt;/div&gt;<br> &lt;div class=&quot;frame&quot;&gt;<br>  &lt;div class=&quot;toggler&quot;&gt;&lt;/div&gt;<br>  &lt;div class=&quot;image image4&quot;&gt;&lt;/div&gt;<br> &lt;/div&gt;<br>&lt;/div&gt;</code></pre>
+
+<p>The parent <code>&lt;div class=&quot;frames&quot;&gt;</code> container is used to define the width of the animation. Each individual <code>.frame</code> container is also set to a <code>max-height:0; </code>to prevent a frame to block the following frames when interacting with the animation. This helps make the animation work when hovering either from left to right or right to left.</p>
+
+<pre><code>.frames {<br> width:640px;<br> margin:0 auto;<br> overflow:hidden;<br>}<br>.frame {<br> max-height:0;<br>}</code></pre>
+
+<p>Then each triggering toggler with a specific width and height. The width equals the total parent width divided by the number of frames of our animation. (So here, with just four frames, each toggler will be 25%.) And it’s also set as a <code>float</code> so that every toggler will sit next to each others, even though they’re in separate elements in the HTML.</p>
+
+<pre><code>.toggler {<br> float:left;<br> width:25%;<br> height:320px;<br>}</code></pre>
+
+<p>Finally, <code>.image</code> containers are set with a width and height and a <code>display:none;</code> to hide them by default. Each <code>.image</code> container is set with a different background image, thus giving the illusion of animation. And a simple <code>.frame:hover .image</code> selector is then used to display the image when an individual frame toggler is hovered.</p>
+
+<pre><code>.image {<br> width:640px;<br> height:320px;<br> display:none;<br>}<br>.image1 {<br> background-image: url(image1.jpg);<br>}<br>.image2 {<br> background-image: url(image2.jpg);<br>}<br>.image3 {<br> background-image: url(image3.jpg);<br>}<br>.image4 {<br> background-image: url(image4.jpg);<br>}<br>.frame:hover .image {<br> display: block;<br>}</code></pre>
+
+<p>And voilà! Interactive Animation in HTML emails that work with just <code>:hover</code>. From my tests, this works really well in Apple Mail, the desktop webmails of Gmail, Outlook.com and Yahoo Mail but also on the french webmails of Orange and SFR.</p>
+<p>One quirk I found is that Outlook.com only supports <code>:hover</code> on element selectors, but not on <code>class</code> or <code>id</code> selectors. So our last rule selector (<code>.frame:hover .image</code>) needs to be changed to the following:</p>
+
+<pre><code>.frames div:hover .image {<br> display: block;<br>}</code></pre>
+
+<h2>Making it responsive</h2>
+
+<p>I initially worked with a big sprite image to make images faster to download overall. But because of <a href="https://css-tricks.com/i-like-how-percentage-background-position-works/" rel="noopener" target="_blank">how </a><code><a href="https://css-tricks.com/i-like-how-percentage-background-position-works/" rel="noopener" target="_blank">background-position</a></code><a href="https://css-tricks.com/i-like-how-percentage-background-position-works/" rel="noopener" target="_blank"> works in CSS</a> (which is usually pretty handy), this wasn’t possible. So on top of using <code>max-width </code>instead of fixed <code>width</code>, the biggest trick to make this example responsive is to use a “<a href="https://css-tricks.com/aspect-ratio-boxes/" rel="noopener" target="_blank">magic ratio padding</a>”. So in our previous example, we’ll use <code>padding-bottom:50%;</code> instead of <code>height:320px;</code>. In the final version of my email, my images have a weird <em>565x488</em> size. So in order to keep the image ratio, I’m using a <code>padding-bottom:86.3716814%</code> value (<em>488*100/565=86.3716814</em>).</p>
+
+<p>Because this interactive technique is mostly based on <code>:hover</code>, we might want to disable it on devices where <code>:hover</code> isn’t well suited (typically smartphones). In my final version, I chose to use a <code>@media (hover:none)</code> media query to display a static fallback image. This works well in Apple Mail in iOS. In other email clients, we’d still be able to tap the screen on each individual toggler.</p>
+
+<pre><code>@media(hover:none) {<br> .header div:hover .fallback { display: block; }<br>}</code></pre>
+
+<p>Here’s the final <a href="https://codepen.io/hteumeuleu/pen/NZGeWg" rel="noopener" target="_blank">full version of the Playdate email I created on CodePen</a>.</p>
+
+<hr>
+
+<p>I hope this will inspire many of you to play with this technique and create fun and lovable interactive animations in emails. I’d love to see what you can come up with, so feel free to share your creations in the comments or hit me on Twitter.</p><p>Thanks for reading and have fun!</p>
+
+<hr>
+
+<p><strong>Updated</strong> on 18/06/2019 to clarify where the <code>padding-bottom:86.3716814%</code> comes from in the final example. And added a short paragraph to explain how I took the screenshots from Playdate’s website.</p>
