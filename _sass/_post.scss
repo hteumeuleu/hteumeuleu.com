@@ -1,6 +1,4 @@
 .post {
-	font-size: rem(20px);
-
 	& > * {
 		margin-bottom: rem(16px);
 	}
@@ -48,6 +46,7 @@
 		display: block;
 		max-width: 100%;
 		height: auto;
+		border: 1px solid #eee;
 	}
 
 	.figure--large {
