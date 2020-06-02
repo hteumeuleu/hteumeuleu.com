@@ -64,7 +64,7 @@
 
 	.figure--grid {
 		display: grid;
-		grid-template-columns: 1fr 1fr;
+		grid-template-columns: repeat(2, fit-content(50%));
 		grid-gap: rem(8px);
 
 		figcaption {
@@ -84,9 +84,7 @@
 	}
 
 	.alert {
-		margin-top: rem(48px);
-		margin-left: rem(-13px);
-		margin-right: rem(-13px);
+		margin: rem(48px) rem(-13px);
 	}
 }
 
