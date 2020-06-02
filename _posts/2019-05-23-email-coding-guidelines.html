@@ -39,15 +39,17 @@ date:   2019-05-23 12:08:30 +0200
 <p id="c3e6">Avoid splitting an image into multiple files. This is important for several reasons:</p>
 
 <ul>
-	<li id="45cb"><strong>Performance</strong>. Just <a href="https://developer.yahoo.com/performance/rules.html" rel="noopener">like on the Web</a>, The fewer HTTP requests the better. Downloading a single 50 Kb image is theoretically faster than downloading five 10 Kb images.</li><li id="3fad"><strong>Accessibility</strong>. A single image will let you define a single clean <code>alt</code> text, and style it in case images aren’t visible.</li>
-	<li id="7573"><strong>WebKit</strong> adds small thin lines between images when using a CSS <code>transform</code> on a whole email. This is something used by numerous email clients to adjust the rendering of non responsive emails on smaller screens.
-
+	<li id="45cb"><strong>Performance</strong>. Just <a href="https://developer.yahoo.com/performance/rules.html" rel="noopener">like on the Web</a>, The fewer HTTP requests the better. Downloading a single 50 Kb image is theoretically faster than downloading five 10 Kb images.</li>
+	<li id="3fad"><strong>Accessibility</strong>. A single image will let you define a single clean <code>alt</code> text, and style it in case images aren’t visible.</li>
+	<li id="7573">
+		<strong>WebKit</strong> adds small thin lines between images when using a CSS <code>transform</code> on a whole email. This is something used by numerous email clients to adjust the rendering of non responsive emails on smaller screens.
 		<figure id="a6a6">
 			<img src="https://cdn-images-1.medium.com/max/1200/1*2CHIjuhc9JSmpNjoSQl3aw.jpeg">
 			<figcaption>The current beta of Outlook.com uses a CSS transform to adjust the display of an email within its preview pane. On Chrome or Safari, this can result in thin lines between split images like <a href="https://emails.hteumeuleu.fr/wp-content/uploads/2016/10/doctype-image-xhtml.html" rel="noopener">in this example</a>.</figcaption>
 		</figure>
 	</li>
-	<li id="8e41">Because <strong>shit happens</strong>. Email clients or user preferences may change how your email look. You don’t want <a href="http://i.imgur.com/NhoEN.jpg" rel="noopener">this</a> to happen:
+	<li id="8e41">
+		Because <strong>shit happens</strong>. Email clients or user preferences may change how your email look. You don’t want <a href="http://i.imgur.com/NhoEN.jpg" rel="noopener">this</a> to happen:
 		<figure id="2d1e">
 			<img src="https://cdn-images-1.medium.com/max/800/1*AD5rZWtQxUKthimM7sZBRw.jpeg">
 			<figcaption>Image splitting gone wrong on a LinkedIn email. (Found under “<em>She must be Canadian</em>.” <a href="https://www.reddit.com/r/pics/comments/g1sih/she_must_be_canadian/" rel="noopener">on Reddit</a>.)</figcaption>

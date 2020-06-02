@@ -34,6 +34,10 @@ a:focus, a:active, button:focus, button:active {
 	background-color: #c0e1f1;
 }
 
+.main a:visited {
+	color: rebeccapurple;
+}
+
 button, input {
 	&::-moz-focus-inner {
 		border: none;
