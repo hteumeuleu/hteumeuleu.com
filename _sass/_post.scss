@@ -57,9 +57,8 @@
 	}
 
 	.figure--large {
-		width: 100vw;
+		width: calc(100vw - #{rem(52px)});
 		max-width: rem(1242px);
-		padding-right: rem(26px);
 	}
 
 	.figure--grid {
