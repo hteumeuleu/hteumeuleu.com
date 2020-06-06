@@ -2,7 +2,6 @@
 title:  "Thinking Outside the &lt;table&gt; at TEDC16"
 date:   2016-08-03 21:03:13 +0200
 ---
-<h2 id="c07b">Thinking Outside the &lt;table&gt; at TEDC16</h2>
 <p id="14ca">Last week, I had the honor to speak at <a href="https://litmus.com/conference/london" rel="noopener">The Email Design Conference in London</a> (aka TEDC16 or #LitmusLive). I gave a talk I called “<em>Thinking Outside the &lt;table&gt;”</em>. It’s a mix of some of my previous articles, like <a href="https://emails.hteumeuleu.com/super-mail-forward-an-email-that-evolves-as-you-forward-it-84466596f30d" rel="noopener">Super Mail Forward</a>, <a href="https://emails.hteumeuleu.com/using-flexbox-in-an-email-4b1aa7a69886" rel="noopener">Using Flexbox in an Email</a> or <a href="https://medium.freecodecamp.com/the-fab-four-technique-to-create-responsive-emails-without-media-queries-baf11fdfa848" rel="noopener">The Fab Four Technique</a>, but with a new narration and some new content.</p>
 <p id="13a8">
 <a href="https://speakerdeck.com/hteumeuleu/thinking-outside-the-table" rel="noopener">Here are my raw slides</a>. And here is a transcript of my talk.</p>
@@ -10,79 +9,60 @@ date:   2016-08-03 21:03:13 +0200
 <p id="c407">I am a web developer as well as an email developer. The question I get asked the most when I tell that to web developers is “How is your mental health?”. Because they’re thinking about the disgust they have for using tables for layout, inline styles and other email quirks. But I always thought there’s much more to do if we get past these first feelings.</p>
 <p id="e90b">Today, I want to show you three examples of things I’ve done in the past year or so that illustrate what happens when you start <em>thinking outside the &lt;table&gt;</em>.</p>
 <figure id="5e0a">
-
-
-
-<img src="https://cdn-images-1.medium.com/max/800/1*bJxZ9BMhDw3BWTpFPFVVxQ.png">
-
+<img alt="" src="https://cdn-images-1.medium.com/max/800/1*bJxZ9BMhDw3BWTpFPFVVxQ.png" width="800" height="449">
 </figure>
 <p id="9e7a">My first example is an email I made called <strong>Super Mail Forward</strong>. Last year, Litmus held a community contest which theme was <a href="https://litmus.com/community/discussions/3969-community-contest-emails-worth-forwarding" rel="noopener">Emails Worth Forwarding</a>. The goal was to “<em>take advantage of some of the quirks that happen when an email is forwarded</em>”. I thought this was a very interesting subject, especially since I knew nothing about it.</p>
 
-
-<figure id="a0ea">
-
-
-
-<img src="https://cdn-images-1.medium.com/max/2560/1*Bn5wqfO9jzS5yGOiRmXn5g.png">
-
+<figure id="a0ea" class="figure--large">
+<img alt="" src="https://cdn-images-1.medium.com/max/2560/1*Bn5wqfO9jzS5yGOiRmXn5g.png" width="1366" height="768">
 </figure>
-
 
 <p id="0a97">So first I needed to find out <strong>what happens when you forward an email</strong> (especially from a webmail). And I really wanted to work with webmails because it is much more easier to just fire up a web inspector and see how styles and markup is transformed by a webmail than from most native email clients. So: what happens when you forward an email?</p>
-<p id="0b82">Turns out, <strong>not much more</strong> than when the webmail receives it in the first place. This means that if a webmail doesn’t support background images in CSS, like Outlook.com, it will strip out the `<em>background</em>`property when it receives the email, and forward the email without it after that.</p>
+<p id="0b82">Turns out, <strong>not much more</strong> than when the webmail receives it in the first place. This means that if a webmail doesn’t support background images in CSS, like Outlook.com, it will strip out the <code>background</code>property when it receives the email, and forward the email without it after that.</p>
 <p id="7ffa">So with that in mind, I kept wondering… <strong>How many times can you forward an email before its code becomes complete gibberish? </strong>This gave me the idea of some sort of game where you could forward an email between the four webmails of AOL, Yahoo, Outlook.com and Gmail. Each time you forward it to the correct webmail in the right order, the webmail’s cell will turn green, and stay that way until the end. I built a prototype that did exactly that.</p>
 <figure id="1a01">
-
-
-
-<img src="https://cdn-images-1.medium.com/max/800/1*z6nRU8iIoVEV7b_YrvOaoQ.png">
-
+<img alt="" src="https://cdn-images-1.medium.com/max/800/1*z6nRU8iIoVEV7b_YrvOaoQ.png">
 </figure>
-<p id="8392">
-<a href="https://gist.github.com/hteumeuleu/2a28bae848090a172c1880b7811e2d43" rel="noopener">Here’s the code</a> for a basic version of this email.</p>
-<figure id="941f">
-
-
-
-<img src="https://cdn-images-1.medium.com/max/800/1*wSwHI5RIr-G4_nKi4ar0MQ.png">
-
+<figure>
+<img alt="" src="https://cdn-images-1.medium.com/max/800/1*wSwHI5RIr-G4_nKi4ar0MQ.png">
+<figcaption><a href="https://gist.github.com/hteumeuleu/2a28bae848090a172c1880b7811e2d43" rel="noopener">Here’s the code</a> for a basic version of this email.</figcaption>
 </figure>
 <p id="7990">Some of this code is there to turn the cells green. And some of it is there to maintain other cells grey in certain conditions.</p>
-<p id="b11e">When you send the email for <strong>the first time to AOL</strong>, the webmail will wrap the HTML with a `<em>&lt;div class=”aolReplacedBody”&gt;</em>` and prefix every CSS rule with the same `<em>.aolReplacedBody</em>` class. The first cell is activated with an inline style.</p>
+<p id="b11e">When you send the email for <strong>the first time to AOL</strong>, the webmail will wrap the HTML with a <code>&lt;div class=”aolReplacedBody”&gt;</code> and prefix every CSS rule with the same <code>.aolReplacedBody</code> class. The first cell is activated with an inline style.</p>
 <figure id="ba07">
 
 
 
-<img src="https://cdn-images-1.medium.com/max/800/1*IDwbHydzAVMbXw_h-ld4NQ.png">
+<img alt="" src="https://cdn-images-1.medium.com/max/800/1*IDwbHydzAVMbXw_h-ld4NQ.png">
 
 <figcaption>The code transformed for the first time by AOL’s webmail.</figcaption>
 </figure>
-<p id="e494">In order to maintain this cell grey when viewed in another webmail, I relied on a parsing bug from AOL. When AOL encountered a background image declaration within a `<em>&lt;style&gt;</em>`, it would incorrectly replace the URL of this image with HTML. This didn’t make any sense, and thus this style would get ignored only on AOL, and maintained that way from now on when forwarded to other webmails.</p>
-<p id="058f">When you forward the email <strong>from AOL to Yahoo</strong>, Yahoo will once again prefix every class name with its own prefix (like `<em>yiv113</em>`) as well as with an identifier of its own (like `<em>yui_123456789</em>`).</p>
+<p id="e494">In order to maintain this cell grey when viewed in another webmail, I relied on a parsing bug from AOL. When AOL encountered a background image declaration within a <code>&lt;style&gt;</code>, it would incorrectly replace the URL of this image with HTML. This didn’t make any sense, and thus this style would get ignored only on AOL, and maintained that way from now on when forwarded to other webmails.</p>
+<p id="058f">When you forward the email <strong>from AOL to Yahoo</strong>, Yahoo will once again prefix every class name with its own prefix (like <code>yiv113</code>) as well as with an identifier of its own (like <code>yui_123456789</code>).</p>
 <figure id="68b5">
 
 
 
-<img src="https://cdn-images-1.medium.com/max/800/1*m4whk1x9x8XfO1ciB6K6Pw.png">
+<img alt="" src="https://cdn-images-1.medium.com/max/800/1*m4whk1x9x8XfO1ciB6K6Pw.png">
 
 <figcaption>The code transformed for the second time by Yahoo.</figcaption>
 </figure>
-<p id="84ab">In order to activate the green cell for Yahoo, I used the `<em>@media yahoo</em>` hack (<a href="https://twitter.com/M_J_Robbins/status/572749728229797888" rel="noopener">originally found by Mark Robbins</a>). Last year, Yahoo added support for media queries, but only for a small subset (like `<em>min-width</em>` or `<em>max-width</em>`). Yahoo will remove any keyword it does not recognize or support after a <em>@media</em> declaration. So `<em>@media yahoo</em>` will be transformed to `<em>@media</em>`, thus activating the styles contained in this media query from now on.</p>
-<p id="6c8a">Next, when you forward the email <strong>from Yahoo to Outlook.com</strong>, Outlook.com will once again prefix every class and id attributes with its own prefix (`<em>ecx</em>`), and prefix every CSS rule with `<em>.ExternalClass</em>`. (NB : I’m referring here to the old version of Outlook.com, still available in France.)</p>
+<p id="84ab">In order to activate the green cell for Yahoo, I used the <code>@media yahoo</code> hack (<a href="https://twitter.com/M_J_Robbins/status/572749728229797888" rel="noopener">originally found by Mark Robbins</a>). Last year, Yahoo added support for media queries, but only for a small subset (like <code>min-width</code> or <code>max-width</code>). Yahoo will remove any keyword it does not recognize or support after a <em>@media</em> declaration. So <code>@media yahoo</code> will be transformed to <code>@media</code>, thus activating the styles contained in this media query from now on.</p>
+<p id="6c8a">Next, when you forward the email <strong>from Yahoo to Outlook.com</strong>, Outlook.com will once again prefix every class and id attributes with its own prefix (<code>ecx</code>), and prefix every CSS rule with <code>.ExternalClass</code>. (NB : I’m referring here to the old version of Outlook.com, still available in France.)</p>
 <figure id="2bdb">
 
 
 
-<img src="https://cdn-images-1.medium.com/max/800/1*2VRWvTwa-EhGzZGfuCHHwA.png">
+<img alt="" src="https://cdn-images-1.medium.com/max/800/1*2VRWvTwa-EhGzZGfuCHHwA.png">
 
 </figure>
 <p id="7097">Outlook.com doesn’t support background images declaration in CSS. So it will remove all the inline styles that kept the cells grey with a spacer image. This is great, because it now turns the third cell green for Outlook.com. But it also turns the last one green, normally to dedicated to the final step. In order to prevent this, I set up a rule to maintain this fourth cell grey at this point.</p>
-<p id="014b">Finally, when forwarding the email <strong>from Outlook.com to Gmail</strong>, Gmail will remove every `<em>id</em>` or `<em>class</em>` attributes. This makes all of the styles in the <em>&lt;head&gt;</em> useless. And thus the four cells are activated in green.</p>
+<p id="014b">Finally, when forwarding the email <strong>from Outlook.com to Gmail</strong>, Gmail will remove every <code>id</code> or <code>class</code> attributes. This makes all of the styles in the <em>&lt;head&gt;</em> useless. And thus the four cells are activated in green.</p>
 <figure id="8a9e">
 
 
 
-<img src="https://cdn-images-1.medium.com/max/800/1*wZHjCoIZ_cpFiCSaTSZkkg.png">
+<img alt="" src="https://cdn-images-1.medium.com/max/800/1*wZHjCoIZ_cpFiCSaTSZkkg.png">
 
 </figure>
 <p id="c96c">And that’s how I made a first prototype. And then I thought: if I’m able to play with one cell color, why not spice things up a bit and play with a more complex grid. Like, say, <strong>256 cells</strong>. This is enough to make great pixel art. And since I’m a huge Mario fan, I decided to use the question blocks from Super Mario World.</p>
@@ -90,7 +70,7 @@ date:   2016-08-03 21:03:13 +0200
 
 
 
-<img src="https://cdn-images-1.medium.com/max/800/1*DxesNrAJmLo47_A0rbBfHA.png">
+<img alt="" src="https://cdn-images-1.medium.com/max/800/1*DxesNrAJmLo47_A0rbBfHA.png">
 
 </figure>
 <p id="ae9e">Here’s what the final email looks like. (And <a href="http://emails.hteumeuleu.fr/wp-content/uploads/2016/01/super-mail-forward.html" rel="noopener">here’s the code</a>.)</p>
@@ -98,43 +78,19 @@ date:   2016-08-03 21:03:13 +0200
 
 
 
-<img src="https://cdn-images-1.medium.com/max/800/1*5iDqgmUJW_uUX02kpTJRvw.png">
+<img alt="" src="https://cdn-images-1.medium.com/max/800/1*5iDqgmUJW_uUX02kpTJRvw.png">
 
 </figure>
 <p id="5726">And here are screenshots from its transformation as you forward it between webmails.</p>
 
 
-<figure id="8e08">
+<figure id="8e08" class="figure--large figure--grid">
+<img alt="" src="https://cdn-images-1.medium.com/max/600/1*9dH-YQMrFkL61-8thP0DTg.jpeg">
+<img alt="" src="https://cdn-images-1.medium.com/max/600/1*gYjV_vJ0IcNQfmI1Q-umtQ.jpeg">
+<img alt="" src="https://cdn-images-1.medium.com/max/600/1*xC2UreWE3YkxK59pcSYyXg.jpeg">
+<img alt="" src="https://cdn-images-1.medium.com/max/600/1*SqEGL7tBg41tPOWie99Drg.jpeg">
 
-
-
-<img src="https://cdn-images-1.medium.com/max/600/1*9dH-YQMrFkL61-8thP0DTg.jpeg">
-
-</figure>
-<figure id="70c7">
-
-
-
-<img src="https://cdn-images-1.medium.com/max/600/1*gYjV_vJ0IcNQfmI1Q-umtQ.jpeg">
-
-<figcaption>From AOL to Yahoo…</figcaption>
-</figure>
-
-
-<figure id="aa36">
-
-
-
-<img src="https://cdn-images-1.medium.com/max/600/1*xC2UreWE3YkxK59pcSYyXg.jpeg">
-
-</figure>
-<figure id="87c2">
-
-
-
-<img src="https://cdn-images-1.medium.com/max/600/1*SqEGL7tBg41tPOWie99Drg.jpeg">
-
-<figcaption>… to Outlook.com to Gmail.</figcaption>
+<figcaption>From AOL to Yahoo to Outlook.com to Gmail.</figcaption>
 </figure>
 
 
@@ -143,7 +99,7 @@ date:   2016-08-03 21:03:13 +0200
 
 
 
-<img src="https://cdn-images-1.medium.com/max/800/1*UZf1ASFR8rQgv6TejIQ9DQ.png">
+<img alt="" src="https://cdn-images-1.medium.com/max/800/1*UZf1ASFR8rQgv6TejIQ9DQ.png">
 
 </figure>
 <p id="0da0">A few days after I submitted this email for the Litmus Community Contest, I was very happy to learn that <strong>I won</strong>. Except that, well, I was the only participant. I guess sometimes you feel lonely when you’re an email developer.</p>
@@ -158,50 +114,50 @@ date:   2016-08-03 21:03:13 +0200
 
 
 
-<figure id="a16e">
+<figure id="a16e" class="figure--large">
 
 
 
-<img src="https://cdn-images-1.medium.com/max/2560/1*KQK3NZ1Bidnw-mUZp3VZ1g.png">
+<img alt="" src="https://cdn-images-1.medium.com/max/2560/1*KQK3NZ1Bidnw-mUZp3VZ1g.png" width="1366" height="768">
 
 </figure>
 
 
 <p id="8aaf">
 <strong>Webmail security is very important</strong>. Think of all the personal data you have in your emails. Messages from your family and friends, with personal photos. Messages from your bank. Messages from every website you’ve ever signed up.</p>
-<p id="791c">Next to that, some <strong>HTML and CSS can actually be pretty dangerous</strong> within an email. For example, `<em>position:fixed</em>` in CSS allows to position an element above everything else, even a webmail’s own interface. The following example could place a link to a malicious website above everything else.</p>
-<pre id="9e1c">&lt;a style=”position:fixed; left:0; right:0; top:0; bottom:0;” href=”http://example.com&quot;&gt;…&lt;/a&gt;</pre>
+<p id="791c">Next to that, some <strong>HTML and CSS can actually be pretty dangerous</strong> within an email. For example, <code>position:fixed</code> in CSS allows to position an element above everything else, even a webmail’s own interface. The following example could place a link to a malicious website above everything else.</p>
+<pre id="9e1c"><code>&lt;a style="position:fixed; left:0; right:0; top:0; bottom:0;" href="http://example.com"&gt;…&lt;/a&gt;</code></pre>
 <p id="d711">So some HTML and some CSS <em>have to</em> be filtered within webmails. But sometimes it’s hard to wrap your head around why and how it’s done.</p>
-<p id="8d8c">Last year, I noticed that one of the most popular french webmail filtered the property `<em>overflow</em>` in CSS. But the way it did this was that it replaced the word “<em>overflow</em>” by “<em>java-script</em>”. So the following code…</p>
-<pre id="06ad">&lt;div style=”overflow:hidden;”&gt;…&lt;/div&gt;</pre>
+<p id="8d8c">Last year, I noticed that one of the most popular french webmail filtered the property <code>overflow</code> in CSS. But the way it did this was that it replaced the word <code>overflow</code> by <code>java-script</code>. So the following code…</p>
+<pre id="06ad"><code>&lt;div style="overflow:hidden;"&gt;…&lt;/div&gt;</code></pre>
 <p id="40ba">…would be transformed into:</p>
-<pre id="8391">&lt;div style=”java-script:hidden;”&gt;…&lt;/div&gt;</pre>
-<p id="bddf">But not only did they do this within a `style` attribute in HTML, but they also did that in the email text itself. Which means that if you received an email from <a href="http://stackoverflow.com" rel="noopener">Stack Overflow</a>, it would actually read “<em>Stack java-script”</em>. And they also did that for URL as well. Which means that any link inside the email viewed from that webmail redirects to stackjava-script.com.</p>
+<pre id="8391"><code>&lt;div style="java-script:hidden;"&gt;…&lt;/div&gt;</code></pre>
+<p id="bddf">But not only did they do this within a <code>style</code> attribute in HTML, but they also did that in the email text itself. Which means that if you received an email from <a href="http://stackoverflow.com" rel="noopener">Stack Overflow</a>, it would actually read <code>Stack java-script</code>. And they also did that for URL as well. Which means that any link inside the email viewed from that webmail redirects to stackjava-script.com.</p>
 <figure id="aa2e">
 
 
 
-<img src="https://cdn-images-1.medium.com/max/800/1*NSyVgKlKYd6lE8EpCmE2zA.jpeg">
+<img alt="" src="https://cdn-images-1.medium.com/max/800/1*NSyVgKlKYd6lE8EpCmE2zA.jpeg">
 
 </figure>
 <p id="0570">An attacker could buy this domain, create a phishing page that looks like Stack Overflow, and get users’ credentials. This is very bad for users security.</p>
-<p id="cd57">But above it all, I was haunted by this question: <strong>why java-script?</strong> Why would a webmail replace the name of the `<em>overflow</em>` property in CSS with a `<em>java-script</em>` keyword.</p>
-<p id="a8e9">After looking at lists of keywords in JavaScript, I discovered that `<em>overflow</em>` is actually an event in JavaScript, specific to Mozilla. So I took <a href="https://developer.mozilla.org/en-US/docs/Web/Events" rel="noopener">that list of events in JavaScript</a>, and tested each and every one of them to see what other keywords would be replaced. Fortunately, the most common events attributes in HTML like `<em>onload</em>`, `<em>onmouseover</em>` or `<em>onclick</em>` were filtered by this webmail. But out of the 301 events I tested, only 126 were filtered.</p>
-<p id="c069">Among these unfiltered events was `<em>onanimationend</em>`. It is an event triggered when a CSS animation ends on an element. I thought it should be possible to use this to use JavaScript without any user action required. So I built the following email to trigger a JavaScript alert.</p>
-<pre id="6f6e">&lt;style&gt;<br>    @keyframes bar {}<br>    .foo { animation:bar; }<br>&lt;/style&gt;<br>&lt;div class=”foo” onanimationend=”alert(‘Hi!’);”&gt;&lt;/div&gt;</pre>
+<p id="cd57">But above it all, I was haunted by this question: <strong>why java-script?</strong> Why would a webmail replace the name of the <code>overflow</code> property in CSS with a <code>java-script</code> keyword.</p>
+<p id="a8e9">After looking at lists of keywords in JavaScript, I discovered that <code>overflow</code> is actually an event in JavaScript, specific to Mozilla. So I took <a href="https://developer.mozilla.org/en-US/docs/Web/Events" rel="noopener">that list of events in JavaScript</a>, and tested each and every one of them to see what other keywords would be replaced. Fortunately, the most common events attributes in HTML like <code>onload</code>, <code>onmouseover</code> or <code>onclick</code> were filtered by this webmail. But out of the 301 events I tested, only 126 were filtered.</p>
+<p id="c069">Among these unfiltered events was <code>onanimationend</code>. It is an event triggered when a CSS animation ends on an element. I thought it should be possible to use this to use JavaScript without any user action required. So I built the following email to trigger a JavaScript alert.</p>
+<pre id="6f6e"><code>&lt;style&gt;<br>    @keyframes bar {}<br>    .foo { animation:bar; }<br>&lt;/style&gt;<br>&lt;div class="foo" onanimationend="alert('Hi!');"&gt;&lt;/div&gt;</code></pre>
 <p id="1876">And it worked.</p>
 <figure id="37fa">
 
 
 
-<img src="https://cdn-images-1.medium.com/max/800/1*JmZMLpKAMurZ-eq5yHB8Pw.png">
+<img alt="" src="https://cdn-images-1.medium.com/max/800/1*JmZMLpKAMurZ-eq5yHB8Pw.png">
 
 </figure>
 <p id="ae0b">I was in shock. Because once you let any JavaScript pass, you can do pretty much anything. I was able to load an external script that would read all the emails from a user, send emails on behalf of that user, and even delete emails. I tried this successfully between two of my test accounts.</p>
 <p id="0f95">So of course <strong>I reported this bug</strong>. But it was hard, because this webmail had no bug report form. I had to ask for help on Twitter, and eventually found someone who knew someone on said company. I ended up having a phone call with members from the security team at this company. I explained all the bugs and exploits that I found. And their reception was pretty much a cold shower. I was told that a webmail was by nature a security issue, that they had to make compromises between security and user experience. I told them I was interested to work with them and help them make their webmail more secure for their users. And that was pretty much it.</p>
 <p id="3cdf">
 <strong>All I got was a lousy thank you</strong> a few days after this phone call. It took them more than five months to fix this issue.</p>
-<p id="5e62">So webmail security is a big deal. And here’s an interesting thought exercise. <strong>How do you filter JavaScript out of an email?</strong> You can remove `<em>&lt;script&gt;</em>` tags, which is a good start. But you also need to remove every HTML event attributes. There are hundreds of those, and some are specific to some browsers. And more are added with each new specification.</p>
+<p id="5e62">So webmail security is a big deal. And here’s an interesting thought exercise. <strong>How do you filter JavaScript out of an email?</strong> You can remove <code>&lt;script&gt;</code> tags, which is a good start. But you also need to remove every HTML event attributes. There are hundreds of those, and some are specific to some browsers. And more are added with each new specification.</p>
 <p id="b523">The more I think about it, the more I believe the best way to make a webmail secure is to <strong>use a whitelist</strong>. Only allow HTML tags, attributes and CSS properties that you know are safe.</p>
 
 
@@ -212,77 +168,77 @@ date:   2016-08-03 21:03:13 +0200
 
 
 
-<p id="d1b8">This is something that <strong>Gmail does extremely well</strong>. In fact, probably a little too well for us email developers. Gmail allows no <em>class </em>and no <em>id </em>attributes, no <em>&lt;style&gt;</em> tag on mobile, which means no media queries on mobile.</p>
+<p id="d1b8">This is something that <strong>Gmail does extremely well</strong>. In fact, probably a little too well for us email developers. Gmail allows no <code>class</code> and no <code>id</code> attributes, no <code>&lt;style&gt;</code> tag on mobile, which means no media queries on mobile.</p>
 <p id="1357">There’s a famous quote (<a href="http://martinfowler.com/bliki/TwoHardThings.html" rel="noopener">attributed to Phil Karlton</a>) that I love.</p>
 <blockquote id="6d79">There are <strong>two hard things</strong> in Computer Science: cache invalidation and naming things.</blockquote>
 <p id="6444">I really wish we’d add a third one.</p>
 <blockquote id="d62c">There are <strong>three hard things</strong> in Computer Science: cache invalidation, naming things and <strong>responsive emails</strong>.</blockquote>
 <p id="b2e0">
 <strong>It’s hard to code responsive emails</strong> because you have to juggle between clients like Outlook 2016, which uses Word’s rendering engine and barely supports anything but tables, and a lot of webmail with very unequal CSS support.</p>
-<p id="4267">Thankfully, email developers have come to find their ways around this. And some techniques have become quite popular, like <strong>fluid/hybrid methods</strong> to <a href="http://webdesign.tutsplus.com/tutorials/creating-a-future-proof-responsive-email-without-media-queries--cms-23919" rel="noopener">create responsive emails without media queries</a>. This technique in particular relies to having elements aligned next to each others (using CSS floats or `<em>display:inline-block</em>`) and going below each others when there’s no longer enough space. But I always had one problem with that: on a big mobile screen on Gmail, you end up with tiny centered columns.</p>
+<p id="4267">Thankfully, email developers have come to find their ways around this. And some techniques have become quite popular, like <strong>fluid/hybrid methods</strong> to <a href="http://webdesign.tutsplus.com/tutorials/creating-a-future-proof-responsive-email-without-media-queries--cms-23919" rel="noopener">create responsive emails without media queries</a>. This technique in particular relies to having elements aligned next to each others (using CSS floats or <code>display:inline-block</code>) and going below each others when there’s no longer enough space. But I always had one problem with that: on a big mobile screen on Gmail, you end up with tiny centered columns.</p>
 <p id="64cc">So how can we make a column grow on mobile without media queries?</p>
 <figure id="0a54">
 
 
 
-<img src="https://cdn-images-1.medium.com/max/800/1*MD6-GelOyRttKo7COd-RMQ.jpeg">
+<img alt="" src="https://cdn-images-1.medium.com/max/800/1*MD6-GelOyRttKo7COd-RMQ.jpeg">
 
 </figure>
-<p id="cda2">The first answer that may come to your mind if you’ve done any web development in the past few years is… ＦＬＥＸＢＯＸ. <strong>Flexbox</strong> is an ideal candidate for emails because it allows to build complex grids like the following, that can adapt from desktop sizes to mobile sizes, without a single media query.</p>
+<p id="cda2">The first answer that may come to your mind if you’ve done any web development in the past few years is… <span aria-label="flexbox">ＦＬＥＸＢＯＸ</span>. <strong>Flexbox</strong> is an ideal candidate for emails because it allows to build complex grids like the following, that can adapt from desktop sizes to mobile sizes, without a single media query.</p>
 <figure id="30c1">
 
 
 
-<img src="https://cdn-images-1.medium.com/max/800/1*NmkVJ-XqtWWl_VkWaSuY7g.jpeg">
+<img alt="" src="https://cdn-images-1.medium.com/max/800/1*NmkVJ-XqtWWl_VkWaSuY7g.jpeg">
 
 <figcaption>
 <a href="http://emails.hteumeuleu.fr/wp-content/uploads/2015/06/flexbox-images.html" rel="nofollow noopener">http://emails.hteumeuleu.fr/wp-content/uploads/2015/06/flexbox-images.html</a>
 </figcaption>
 </figure>
 <p id="7818">The main styles required for such a grid are the following.</p>
-<pre id="a984">.grid {<br>    display: flex;<br>    flex-wrap: wrap;<br>    flex-direction: row;<br>}</pre>
-<pre id="9909">.grid &gt; * {<br>    flex: 1 1 auto;<br>}</pre>
-<p id="26b4">This works great in a browser. But in a webmail like Gmail, the only style supported is `display:flex`. This means that the default flexbox values are applied, and the previous grid looks like this.</p>
+<pre id="a984"><code>.grid {<br>    display: flex;<br>    flex-wrap: wrap;<br>    flex-direction: row;<br>}
+.grid &gt; * {<br>    flex: 1 1 auto;<br>}</code></pre>
+<p id="26b4">This works great in a browser. But in a webmail like Gmail, the only style supported is <code>display:flex</code>. This means that the default flexbox values are applied, and the previous grid looks like this.</p>
 <figure id="437c">
 
 
 
-<img src="https://cdn-images-1.medium.com/max/800/1*vLY-FqtsOyDFIZuVoShDRQ.jpeg">
+<img alt="" src="https://cdn-images-1.medium.com/max/800/1*vLY-FqtsOyDFIZuVoShDRQ.jpeg">
 
 </figure>
 <p id="2432">So flexbox in an email is out of the way. So how can we make a column grow on mobile without media queries <em>and</em> without flexbox?</p>
 <p id="b591">I found a solution. And there are <strong>three ideas</strong> that put me on track.</p>
-<p id="983d">The first one is <strong>Gmail CSS support</strong>. With a few exceptions, Gmail filters styles based on property names, and not on their values. This means that in the following example, we can’t use the `<em>background-size</em>` property because Gmail doesn’t support it.</p>
-<pre id="d329">.hero {<br>    background: url(image.jpg) 0 0;<br>    background-size: cover;<br>}</pre>
-<p id="1866">However, we can use a <em>background-size</em> declaration within the shorthand `<em>background</em>` property, and Gmail won’t filter it.</p>
-<pre id="f86a">.hero {<br>    background: url(image.jpg) 0 0 / cover;<br>}</pre>
-<p id="a3a4">This means we can also use things <em>linear-gradient</em> or <em>radial-gradient</em> in CSS.</p>
-<pre id="7708">.hero {<br>     background:radial-gradient(circle at 30% 107%, <br>         #fdf497 0%, #fdf497 5%, #fd5949 45%, <br>         #d6249f 60%, #285aeb 90%);<br>}</pre>
+<p id="983d">The first one is <strong>Gmail CSS support</strong>. With a few exceptions, Gmail filters styles based on property names, and not on their values. This means that in the following example, we can’t use the <code>background-size</code> property because Gmail doesn’t support it.</p>
+<pre id="d329"><code>.hero {<br>    background: url(image.jpg) 0 0;<br>    background-size: cover;<br>}</code></pre>
+<p id="1866">However, we can use a <code>background-size</code> declaration within the shorthand <code>background</code> property, and Gmail won’t filter it.</p>
+<pre id="f86a"><code>.hero {<br>    background: url(image.jpg) 0 0 / cover;<br>}</code></pre>
+<p id="a3a4">This means we can also use things <code>linear-gradient</code> or <code>radial-gradient</code> in CSS.</p>
+<pre id="7708"><code>.hero {<br>     background:radial-gradient(circle at 30% 107%, <br>         #fdf497 0%, #fdf497 5%, #fd5949 45%, <br>         #d6249f 60%, #285aeb 90%);<br>}</code></pre>
 <p id="f16e">(This was actually done by the great <a href="http://emailweekly.co/" rel="noopener">EmailWeekly</a> newsletter as a tribute to the new Instagram logo a few months ago.)</p>
-<p id="28c5">This means <strong>Gmail supports the <em>calc()</em> function in CSS</strong>. This is pretty interesting because it means we can do layout calculations based on elements width. For example, the following code would create a fluid column taking the full width of a parent element, minus 200px fixed pixels for a sidebar.</p>
-<pre id="fd23">.main {<br>    width: calc(100% — 200px);<br>}</pre>
+<p id="28c5">This means <strong>Gmail supports the <code>calc()</code> function in CSS</strong>. This is pretty interesting because it means we can do layout calculations based on elements width. For example, the following code would create a fluid column taking the full width of a parent element, minus 200px fixed pixels for a sidebar.</p>
+<pre id="fd23"><code>.main {<br>    width: calc(100% — 200px);<br>}</code></pre>
 <p id="2cb6">The second idea that helped me find a solution is <a href="http://madebymike.com.au/writing/precise-control-responsive-typography/" rel="noopener">this article about <strong>responsive typography</strong>
 </a> by Mike Riethmuller. He created the very long following formula mixing font sizes and breakpoints boundaries, viewport units and division and multiplication.</p>
-<pre id="7d66">font-size<strong>:</strong> calc<strong>(</strong> 12px <strong>+</strong> <strong>(</strong>24 - 12<strong>)</strong> <strong>*</strong> <strong>(</strong> <strong>(</strong>100vw - 400px<strong>)</strong> <strong>/</strong> <strong>(</strong> 800 - 400<strong>)</strong> <strong>));</strong>
+<pre id="7d66"><code>font-size<strong>:</strong> calc<strong>(</strong> 12px <strong>+</strong> <strong>(</strong>24 - 12<strong>)</strong> <strong>*</strong> <strong>(</strong> <strong>(</strong>100vw - 400px<strong>)</strong> <strong>/</strong> <strong>(</strong> 800 - 400<strong>)</strong> <strong>));</strong></code>
 </pre>
-<p id="0be4">While this is an amazing example of what’s possible with <em>calc()</em>, this method still requires media queries as a railing guard to prevent font sizes from shrinking too low or growing too big. But still, I thought that was very interesting.</p>
+<p id="0be4">While this is an amazing example of what’s possible with <code>calc()</code>, this method still requires media queries as a railing guard to prevent font sizes from shrinking too low or growing too big. But still, I thought that was very interesting.</p>
 <p id="aeb1">The last idea that helped me find a solution is <a href="http://goetter.tumblr.com/post/64119638003/quiz-parce-que-la-taille-%C3%A7a-compte" rel="noopener">this quiz by fellow french developer Raphaël Goetter</a>. He asks: “Without cheating, what is the size of an element with the CSS properties below?”</p>
-<pre id="4a97">min-width: 480px;<br>width: 320px;<br>max-width: 160px;</pre>
+<pre id="4a97"><code>min-width: 480px;<br>width: 320px;<br>max-width: 160px;</code></pre>
 <p id="ec34">The answer is… 480px. This is how it’s defined <a href="https://www.w3.org/TR/REC-CSS2/visudet.html#min-max-widths" rel="noopener">in the CSS 2 specification</a>. Basically it gets down to this:</p>
 <ul>
 <li id="bafd">If the <em>width</em> value is greater than the <em>max-width</em> value, <em>max-width</em> wins.</li>
 <li id="02c8">If the <em>min-width</em> value is greater than the <em>width</em> or <em>max-width</em> values,<em>min-width</em> wins.</li>
 </ul>
 <p id="87e6">With all this in mind, I spent countless time looking for a solution, playing with the <em>calc()</em> function, trying things with viewport units in CSS, etc. Until finally… Bingo! I had something!</p>
-<p id="3500">The technique I found is based on the three properties `<em>width`</em>, `<em>min-width`</em> and `<em>max-width`</em> and the <em>calc()</em> function in CSS.</p>
+<p id="3500">The technique I found is based on the three properties <code>width</code>, <code>min-width</code> and <code>max-width</code> and the <code>calc()</code> function in CSS.</p>
 <p id="8980">And I called that… <strong>The Fab Four Technique</strong>.</p>
 
 
-<figure id="5274">
+<figure id="5274" class="figure--large">
 
 
 
-<img src="https://cdn-images-1.medium.com/max/2560/1*CTEgAIOhC5vasl5cL5Q6tQ.png">
+<img alt="" src="https://cdn-images-1.medium.com/max/2560/1*CTEgAIOhC5vasl5cL5Q6tQ.png" width="1366" height="768">
 
 </figure>
 
@@ -293,28 +249,18 @@ date:   2016-08-03 21:03:13 +0200
 <li id="a494">There are two hard things in Computer Science: cache invalidation and <strong>naming things</strong>.</li>
 </ol>
 <p id="802e">The Fab Four technique allows to build a grid that will go (for example) from four columns above a defined breakpoint to a single column below it. Here is the corresponding code.</p>
-<pre id="43ac">max-width: 100%;<br>min-width: 25%;<br>width: calc((480px — 100%) * 480);</pre>
+<pre id="43ac"><code>max-width: 100%;<br>min-width: 25%;<br>width: calc((480px — 100%) * 480);</code></pre>
 <ul>
-<li id="d69c">The <em>max-width</em> property defines the width of our elements below our breakpoint. With 100%, the column will grow full width.</li>
-<li id="c6c6">The <em>min-width</em> property defines the width of our elements above our breakpoint. With 25%, we’ll get four columns.</li>
-<li id="f18b">The <em>width</em> makes the calculation with the desired breakpoint. Here we define a breakpoint of 480px.</li>
+<li id="d69c">The <code>max-width</code> property defines the width of our elements below our breakpoint. With 100%, the column will grow full width.</li>
+<li id="c6c6">The <code>min-width</code> property defines the width of our elements above our breakpoint. With 25%, we’ll get four columns.</li>
+<li id="f18b">The <code>width</code> makes the calculation with the desired breakpoint. Here we define a breakpoint of 480px.</li>
 </ul>
 <p id="7f21">Let’s see what it looks like at two different sizes: one above our breakpoint, and one below it.</p>
 
 
-<figure id="f15d">
-
-
-
-<img src="https://cdn-images-1.medium.com/max/600/1*-f04L5Stnyvn_Nsd44Imeg.png">
-
-</figure>
-<figure id="71a5">
-
-
-
-<img src="https://cdn-images-1.medium.com/max/600/1*ul7tIxRFkzVoaKhL0dAXHQ.png">
-
+<figure id="f15d" class="figure--large figure--grid">
+<img alt="" src="https://cdn-images-1.medium.com/max/600/1*-f04L5Stnyvn_Nsd44Imeg.png">
+<img alt="" src="https://cdn-images-1.medium.com/max/600/1*ul7tIxRFkzVoaKhL0dAXHQ.png">
 </figure>
 
 
@@ -324,25 +270,25 @@ date:   2016-08-03 21:03:13 +0200
 
 
 
-<img src="https://cdn-images-1.medium.com/max/800/1*_5WPPhfDmEqLY6MT3Bjf1g.png">
+<img alt="" src="https://cdn-images-1.medium.com/max/800/1*_5WPPhfDmEqLY6MT3Bjf1g.png">
 
 </figure>
 <p id="4492">This works well in Gmail (from the desktop webmail, even for Google Apps accounts, to the iOS and Android apps), but also on Apple Mail, the old Outlook.com, Thunderbird, Orange and AOL’s webmail. But there are still a few quirks left to make it work perfectly.</p>
 <p id="7339">
-<strong>The old version of Outlook.com</strong> (still available by default in France) supports <em>calc()</em>. But it will filter every property with a <em>calc()</em> that includes any parenthesis. This means that “<em>calc(480px — 100%)</em>” is supported, but “<em>calc((480px — 100%) * 480)</em>” is not. Since the initial formula involves parenthesis, we need to refactor it to avoid parenthesis. So the formula to support the old Outlook.com looks like this.</p>
-<pre id="0234">width:calc(480px * 480 — 100% * 480);</pre>
+<strong>The old version of Outlook.com</strong> (still available by default in France) supports <code>calc()</code>. But it will filter every property with a <code>calc()</code> that includes any parenthesis. This means that <code>calc(480px — 100%)</code> is supported, but <code>calc((480px — 100%) * 480)</code> is not. Since the initial formula involves parenthesis, we need to refactor it to avoid parenthesis. So the formula to support the old Outlook.com looks like this.</p>
+<pre id="0234"><code>width:calc(480px * 480 — 100% * 480);</code></pre>
 <p id="a0a9">
-<strong>Older versions of Android</strong> (before Android 5.0) <strong>or iOS</strong> (before iOS 7) require <em>-webkit-</em> prefixes in order to work. So our code looks like the following.</p>
-<pre id="bf61">max-width: 100%;<br>min-width: 25%;<br>width: -webkit-calc(480px * 480 — 100% * 480);<br>width: calc(480px * 480 — 100% * 480);</pre>
-<p id="eefd">For other clients that do not support <em>calc() </em>(like Yahoo), we need to provide a <strong>graceful degradation</strong>. We can use a fluid/hybrid fallback with the following styles.</p>
-<pre id="7d02">display:inline-block;<br>min-width:120px;<br>width:25%;</pre>
-<p id="35d3">But when combined with the fab four code, we end up with two declarations for the <em>min-width</em> property. In order to prevent the two to collapse, we’ll wrap the fab four property with a <em>calc()</em> as well. Which gives us the following.</p>
-<pre id="6cb7">display:inline-block;<br>min-width:120px;<br>width:25%;<br>max-width:100%;<br>min-width:-webkit-calc(25%);<br>min-width:calc(25%);<br>width:-webkit-calc(480px * 480 – 100% * 480);<br>width:calc(480px * 480 – 100% * 480);</pre>
+<strong>Older versions of Android</strong> (before Android 5.0) <strong>or iOS</strong> (before iOS 7) require <code>-webkit-</code> prefixes in order to work. So our code looks like the following.</p>
+<pre id="bf61"><code>max-width: 100%;<br>min-width: 25%;<br>width: -webkit-calc(480px * 480 — 100% * 480);<br>width: calc(480px * 480 — 100% * 480);</code></pre>
+<p id="eefd">For other clients that do not support <code>calc() </code>(like Yahoo), we need to provide a <strong>graceful degradation</strong>. We can use a fluid/hybrid fallback with the following styles.</p>
+<pre id="7d02"><code>display:inline-block;<br>min-width:120px;<br>width:25%;</code></pre>
+<p id="35d3">But when combined with the fab four code, we end up with two declarations for the <code>min-width</code> property. In order to prevent the two to collapse, we’ll wrap the fab four property with a <code>calc()</code> as well. Which gives us the following.</p>
+<pre id="6cb7"><code>display:inline-block;<br>min-width:120px;<br>width:25%;<br>max-width:100%;<br>min-width:-webkit-calc(25%);<br>min-width:calc(25%);<br>width:-webkit-calc(480px * 480 – 100% * 480);<br>width:calc(480px * 480 – 100% * 480);</code></pre>
 <p id="3ded">
-<strong>The new Outlook.com</strong> doesn’t support calc() too, so our gracefully degraded fallback should apply. However, this webmail has a bug where it will empty completely an inline `<em>style</em>` attribute if there’s a multiplication sign within it. In order to prevent that, we need to make our calculation by hand, which gives the following.</p>
-<pre id="c148">width:calc(230400px - 48000%);</pre>
+<strong>The new Outlook.com</strong> doesn’t support <code>calc()</code> too, so our gracefully degraded fallback should apply. However, this webmail has a bug where it will empty completely an inline <code>style</code> attribute if there’s a multiplication sign within it. In order to prevent that, we need to make our calculation by hand, which gives the following.</p>
+<pre id="c148"><code>width:calc(230400px - 48000%);</code></pre>
 <p id="3d64">The final complete code looks like this.</p>
-<pre id="34a2">display:inline-block;<br>min-width:120px;<br>width:25%;<br>max-width:100%;<br>min-width:-webkit-calc(25%);<br>min-width:calc(25%);<br>width:-webkit-calc(230400px - 48000%);<br>width:calc(230400px - 48000%);</pre>
+<pre id="34a2"><code>display:inline-block;<br>min-width:120px;<br>width:25%;<br>max-width:100%;<br>min-width:-webkit-calc(25%);<br>min-width:calc(25%);<br>width:-webkit-calc(230400px - 48000%);<br>width:calc(230400px - 48000%);</code></pre>
 
 
 
@@ -358,7 +304,7 @@ date:   2016-08-03 21:03:13 +0200
 
 
 
-<img src="https://cdn-images-1.medium.com/max/800/1*m3ZQBOtwEy-Bkp8XnoaxWA.png">
+<img alt="Constraints drive creativity." src="https://cdn-images-1.medium.com/max/800/1*m3ZQBOtwEy-Bkp8XnoaxWA.png">
 
 </figure>
 <p id="1387">Email developers have a tendency to complain about the lack of great CSS support in webmails. And for sure, there are bugs. But turns out we can actually help fix them. And webmails also have their own security constraints, meaning they can not support everything.</p>

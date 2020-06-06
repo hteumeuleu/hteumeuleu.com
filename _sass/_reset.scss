@@ -28,14 +28,16 @@ a {
 	color: inherit;
 }
 
-a:focus, a:active, button:focus, button:active {
-	outline: 1px dashed #3687c6;
-	outline-offset: rem(2px);
-	background-color: #c0e1f1;
-}
+.main {
+	a:focus, a:active, button:focus, button:active {
+		// outline: 1px dashed #3687c6;
+		// outline-offset: rem(2px);
+		background-color: #c0e1f1;
+	}
 
-.main a:visited {
-	color: rebeccapurple;
+	a:visited {
+		color: rebeccapurple;
+	}
 }
 
 button, input {
