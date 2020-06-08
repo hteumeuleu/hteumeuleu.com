@@ -111,6 +111,20 @@ a.title,
 	text-decoration: none;
 }
 
+// Footer
+.footer {
+	margin: 0 rem(-20px);
+	padding: rem(30px) rem(20px);
+	color: #fff;
+	font-size: rem(20px);
+	background-color: rgba(0, 0, 0, 0.84);
+
+	@media only screen and (min-width: rem(1280px)) {
+		margin: 0 calc((50vw - 50%) * -1);
+		padding: rem(30px) calc((50vw - 50%));
+	}
+}
+
 // Logo
 .title::before {
 	content: '';
@@ -172,4 +186,14 @@ a.title,
 	font-variant-numeric: tabular-nums;
 	background: #e46242;
 	border-radius: rem(2.5px);
+}
+
+// Posts list
+.posts-list-item {
+	margin-bottom: rem(8px);
+
+	time {
+		display: block;
+		font-size: rem(20px);
+	}
 }
