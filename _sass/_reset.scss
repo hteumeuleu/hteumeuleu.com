@@ -30,8 +30,6 @@ a {
 
 .main {
 	a:focus, a:active, button:focus, button:active {
-		// outline: 1px dashed #3687c6;
-		// outline-offset: rem(2px);
 		background-color: #c0e1f1;
 	}
 
@@ -64,4 +62,9 @@ figcaption {
 	color: rgba(0, 0, 0, 0.54);
 	text-align: left;
 	font-size: 0.75em;
+}
+
+pre:focus-within {
+	outline: rem(8px) solid #f4ffa2;
+	outline-offset: rem(2px);
 }
