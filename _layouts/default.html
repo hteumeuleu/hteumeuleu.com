@@ -2,7 +2,11 @@
 <html lang="en">
 <head>
 	<meta charset="UTF-8" />
-	<title>{{ page.title | remove: '`' | escape_once | markdownify | strip_html | strip }}</title>
+	{%- assign page-title-appendix = "" -%}
+	{%- if page.url != "/" -%}
+	{%- assign page-title-appendix = " — HTeuMeuLeu.com" -%}
+	{%- endif -%}
+	<title>{{ page.title | remove: '`' | escape_once | markdownify | strip_html | strip | append: page-title-appendix }}</title>
 	<link rel="stylesheet" href="/assets/css/styles.css" />
 	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 	<meta property="og:type" content="website" />
@@ -22,7 +26,9 @@
 			{{ content }}
 		</main>
 		<footer class="footer" role="contentinfo">
-			<p>Footer. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sed qui nobis ipsa laborum repellat, ad vel? Inventore deleniti cum beatae aut eligendi, nihil voluptatibus assumenda debitis. Maxime consectetur dolorum, facilis.</p>
+			<p><b>HTeuMeuLeu by Rémi Parmentier</b></p>
+			<p>French email and web developer working at <a href="https://www.tilt-studio.fr">Tilt Studio</a>.</p>
+			<p>Source code available on <a href="https://github.com/hteumeuleu/hteumeuleu.com">GitHub</a>.</p>
 		</footer>
 	</div>
 </body>

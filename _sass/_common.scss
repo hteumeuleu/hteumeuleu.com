@@ -114,14 +114,14 @@ a.title,
 // Footer
 .footer {
 	margin: 0 rem(-20px);
-	padding: rem(30px) rem(20px);
+	padding: rem(64px) rem(20px);
 	color: #fff;
 	font-size: rem(20px);
 	background-color: rgba(0, 0, 0, 0.84);
 
 	@media only screen and (min-width: rem(1280px)) {
 		margin: 0 calc((50vw - 50%) * -1);
-		padding: rem(30px) calc((50vw - 50%));
+		padding: rem(64px) calc((50vw - 50%));
 	}
 }
 
