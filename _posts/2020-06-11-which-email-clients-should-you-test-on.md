@@ -4,7 +4,7 @@ title:  "Which email clients should you test on?"
 
 Testing is a very important part of coding robust HTML emails. But you might not always have the time to do extensive tests. Here's the top three email clients I recommend testing in.
 
-1. **Gmail Apps (iOS or Android) with a Non Gmail Account** (also kown as GANGA or Gmail IMAP). This gets you through most of Gmail quirks (its subset of supported HTML and CSS, its freakiness to remove entire `style` attributes if there's something it doesn't like in it, …) plus the extra layer of GANGA, meaning no `<style>` and no media queries support.
+1. **Gmail Apps (iOS or Android) with a Non Gmail Account** (also known as GANGA or Gmail IMAP). This gets you through most of Gmail quirks (its subset of supported HTML and CSS, its freakiness to remove entire `style` attributes if there's something it doesn't like in it, …) plus the extra layer of GANGA, meaning no `<style>` and no media queries support.
 2. **Outlook 2016 on Windows at 120dpi**. This gets you through Outlook's rendering engine, plus the extra weirdness of [rendering at 120 dpi](https://www.courtneyfantinato.com/correcting-outlook-dpi-scaling-issues/). And why 2016 and not 2019? Because 2019 actually has extra support for a few things like `max-width`. So 2016 is more reflective of Outlook versions on Windows, all the way back to Outlook 2007.
 3. **Outlook.com on desktop with dark mode enabled.** This gets you through the usual filters webmails have, a very restricted display's width for emails, plus the dark mode color changer.
 
