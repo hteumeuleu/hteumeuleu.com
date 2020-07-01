@@ -50,8 +50,8 @@
 	}
 
 	blockquote {
-		margin-top: rem(48px);
-		margin-bottom: rem(48px);
+		margin-top: rem(16px);
+		margin-bottom: rem(16px);
 		border-left: rem(8px) solid #f2f2f2;
 		padding-left: rem(16px);
 	}
@@ -93,7 +93,7 @@
 
 .post-title {
 	font-size: rem(40px);
-	line-height: 1;
+	line-height: 1.25;
 	margin-top: 0.25em;
 	margin-bottom: 0.25em;
 }
