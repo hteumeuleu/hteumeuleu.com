@@ -26,15 +26,77 @@ And each of these categories will only apply to certain HTML elements:
 
 This means that not only we are limited by Outlook’s own capabilities. So no `border-radius` nor `background-image`, for example.
 
-But more importantly, we must think about which element to use to apply certain styles. So if I have to define a `width` or an `height`, I will need a `<table>`. If I have to use a `padding`, I will also need a `<table>`. `border-left`? `<table>`!
+But more importantly, we must think about which element to use to apply certain styles. So if I have to define a `width` or an `height` on a generic container element, I will use a `<table>`. If I need a `padding`, I will also use a `<table>`. `border-left`? `<table>`!
 
 To this day, *The Outlooks* on Windows are the sole reason we still use tables in HTML emails. Luckily, there are ways for us to only make those tables visible for Outlook, hiding them to more capable email clients and allowing us to use more semantic code.
 
 # Conditional comments
 
+Microsoft introduced [conditional comments](https://docs.microsoft.com/en-us/previous-versions/windows/internet-explorer/ie-developer/compatibility/ms537512(v%3dvs.85)) back in 1999 in Internet Explorer 5. The idea is clever: inside a regular HTML comment (`<!-- -->`), you can code a condition that will make the rest of the content visible if fulfilled. Here’s an example:
+
+```
+<!--[if IE]>
+<p>This is only visible in Internet Explorer.</p>
+<![endif]-->
+```
+
+Conditional comments were removed starting Internet Explorer 10. But they’re still supported in all Windows versions of Outlook using Word’s rendering engine. Instead of using `IE` as a condition, we’re going to use the `mso` keyword.
+
+```
+<!--[if mso]>
+<p>This is only visible in Outlook 2007-2019 on Windows.</p>
+<![endif]-->
+```
+
+We can also append a version number to target only a specific Outlook version. Note that the version number is the actual software version number (`12`, `14`, …), not the commercial name (2007, 2010, …).
+
+```
+<!--[if mso 12]>
+<p>This is Outlook 2007.</p>
+<![endif]-->
+
+<!--[if mso 14]>
+<p>This is Outlook 2010.</p>
+<![endif]-->  
+<!--[if mso 15]>
+<p>This is Outlook 2013.</p>
+<![endif]-->  
+<!--[if mso 16]>
+<p>This is Outlook 2016. And 2019.</p>
+<![endif]-->
+```
+
+Things got nice for a bit in 2016 because the version number (`16`) actually matched the commercial name (2016). But unfortunately for us, Microsoft decided to keep the exact same version number for Outlook 2019, so both are indistinguishable now. Oh, and because superstition is a thing, there’s never been a version 13.
+
+We can also use operators to create more complex conditions, like `gte` (*greater-than or equal*) or `lte` (*less-than or equal*).
+
+```
+<!--[if gte mso 9]>
+<p>This is Outlook 2007 and above.</p>
+<![endif]-->
+```
+
+Even though this example is extremely popular in code you can find online, I recommend to use the `[if mso]` condition to target all Outlook versions using Word’s rendering engine.
+
+Another operator I use is the *NOT* operator (`!`) that lets us build content for everything but *The Outlooks*.
+
+```
+<!--[if !mso]><!-->
+<p>This is everything but The Outlooks.</p>
+<!--<![endif]-->
+```
+
+Are conditional comments safe to use in HTML emails? Remember when I said *nothing works everywhere*? Well, the desktop webmail of the german provider T-Online.de renders content in conditional comments.
+
+https://github.com/hteumeuleu/email-bugs/issues/43
+
 # `mso` properties
 
+https://stigmortenmyre.no/mso/html/concepts/ofconstyletable.htm
+
 # VML
+
+https://docs.microsoft.com/en-us/windows/win32/vml/web-workshop---specs---standards----how-to-use-vml-on-web-pages
 
 ---
 
