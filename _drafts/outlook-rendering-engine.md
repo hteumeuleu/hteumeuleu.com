@@ -4,11 +4,13 @@ title:  "Making sense of Outlook’s rendering engine"
 
 In 2007, Apple introduced the first iPhone. The same year, Microsoft introduced Outlook 2007 on Windows and its brand new HTML and CSS rendering engine: **Word**. It makes a lot of sense from an authoring point of view. But let’s just say to keep things polite that Word is not very good at rendering HTML and CSS. And while Outlook on macOS, iOS or Android all use WebKit or Blink as a rendering engine, even the latest release on Windows (Outlook 2019) still uses Word. In 2007, the iPhone paved the way for a mobile future while Outlook doomed HTML emails to use deprecated code and weird quirks forever.
 
-There are three things that will help us tame the beasts that are the Windows versions of Outlook (or *The Outlooks*, as I like to call them): Tables, tables, and more tables. But also conditional comments, `mso` properties, and VML. Let’s see each of those in more details.
+There are four things that will help us tame the beasts that are the Windows versions of Outlook (or *The Outlooks*, as I like to call them): **tables**, tables, tables and more tables. But also: **conditional comments**, **`mso` properties**, and **VML**.
 
-# Tables
+Let’s see each of those in more details.
 
-The only official existing documentation about Word’s rendering is a 2006’s post from Microsoft explaining [HTML and CSS Rendering Capabilities in Outlook 2007](https://docs.microsoft.com/en-us/previous-versions/office/developer/office-2007/aa338201(v=office.12)?redirectedfrom=MSDN). But it’s still enough to apprehend how Word’s engine works and why we’re going to need tables.
+## Tables
+
+The only official existing documentation about Word’s rendering is a 2006’s post from Microsoft explaining [HTML and CSS Rendering Capabilities in Outlook 2007](https://docs.microsoft.com/en-us/previous-versions/office/developer/office-2007/aa338201(v=office.12)?redirectedfrom=MSDN). But it’s still enough to comprehend how Word’s engine works and why we’re going to need tables.
 
 Microsoft splits CSS properties into three categories:
 
@@ -30,7 +32,7 @@ But more importantly, we must think about which element to use to apply certain 
 
 To this day, *The Outlooks* on Windows are the sole reason we still use tables in HTML emails. Luckily, there are ways for us to only make those tables visible for Outlook, hiding them to more capable email clients and allowing us to use more semantic code.
 
-# Conditional comments
+## Conditional comments
 
 Microsoft introduced [conditional comments](https://docs.microsoft.com/en-us/previous-versions/windows/internet-explorer/ie-developer/compatibility/ms537512(v%3dvs.85)) back in 1999 in Internet Explorer 5. The idea is clever: inside a regular HTML comment (`<!-- -->`), you can code a condition that will make the rest of the content visible if fulfilled. Here’s an example:
 
@@ -86,15 +88,29 @@ Another operator I use is the *NOT* operator (`!`) that lets us build content fo
 <!--<![endif]-->
 ```
 
-Are conditional comments safe to use in HTML emails? Remember when I said *nothing works everywhere*? Well, the desktop webmail of the german provider T-Online.de renders content in conditional comments.
+Are conditional comments safe to use in HTML emails? Remember when I said *nothing works everywhere*? Well, the desktop webmail of the german provider T-Online.de renders content in conditional comments[2].
 
-https://github.com/hteumeuleu/email-bugs/issues/43
 
-# `mso` properties
+## `mso` properties
 
-https://stigmortenmyre.no/mso/html/concepts/ofconstyletable.htm
+*The Outlooks*’ rendering engine also has a lot of proprietary properties prefixed by the `mso-` keyword. There are hundreds and hundreds of those, documented by Microsoft in [a <abbr title="Compiled HTML Help">CHM</abbr> file](https://docs.microsoft.com/en-us/previous-versions/office/developer/office2000/aa155477(v=office.10)?redirectedfrom=MSDN). (Jason Rodriguez has [a great story on how to get to that file](https://rodriguezcommaj.com/blog/dial-ed-for-mso), but fortunately Stig Morten Myre has [an online archive](https://stigmortenmyre.no/mso/html/concepts/ofconstyletable.htm).)
 
-# VML
+One interesting point is that for most standards CSS properties, Microsoft has an equivalent proprietary version prefixed by `mso-` and suffixed by `-alt`. So let’s say you want to define a `padding` value but only for *the Outlooks*, you can use the `mso-padding-alt` property.
+
+```
+<td style="mso-padding-alt:0 16px"></td>
+```
+
+Another thing is that some proprietary properties of Outlook can mimick their modern CSS equivalent. For example, `text-underline-color` in Outlook is the same as `text-decoration-color` in CSS. So if you want to apply a specific color to a text underline, you can use both properties:
+
+```
+text-underline-color: red; /* Outlook version */
+text-decoration-color: red; /* Standard version for clients that supports it */
+```
+
+Another example is the property `mso-hide:all`, which is equivalent to `display:none` (to hide an element).
+
+## VML
 
 https://docs.microsoft.com/en-us/windows/win32/vml/web-workshop---specs---standards----how-to-use-vml-on-web-pages
 
@@ -109,3 +125,4 @@ From an authoring point of view, it makes a lot of sense. And because Word’s e
 
 ---
 [1] https://web.archive.org/web/20110311083708/http://blogs.office.com/b/microsoft-outlook/archive/2009/06/24/the-power-of-word-in-outlook.aspx
+[2] https://github.com/hteumeuleu/email-bugs/issues/43
