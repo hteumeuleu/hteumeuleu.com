@@ -26,7 +26,7 @@ And each of these categories will only apply to certain HTML elements:
 
 ![CSS support in Outlook 2007-2019 diagram](/uploads/2020/07/css-support-in-outlook.png)
 
-This means that not only we are limited by Outlook’s own capabilities. So no `border-radius` nor `background-image`, for example.
+This means that not only we are limited by Outlook’s own capabilities. (So, no `background-image` nor `border-radius`, for example.)
 
 But more importantly, we must think about which element to use to apply certain styles. So if I have to define a `width` or an `height` on a generic container element, I will use a `<table>`. If I need a `padding`, I will also use a `<table>`. `border-left`? `<table>`!
 
@@ -88,7 +88,9 @@ Another operator I use is the *NOT* operator (`!`) that lets us build content fo
 <!--<![endif]-->
 ```
 
-Are conditional comments safe to use in HTML emails? Remember when I said *nothing works everywhere*? Well, the desktop webmail of the german provider T-Online.de renders content in conditional comments[2].
+Are conditional comments safe to use in HTML emails?
+
+Well, the desktop webmail of the german provider T-Online.de renders content in conditional comments[2].
 
 
 ## `mso` properties
@@ -108,7 +110,9 @@ text-underline-color: red; /* Outlook version */
 text-decoration-color: red; /* Standard version for clients that supports it */
 ```
 
-Another example is the property `mso-hide:all`, which is equivalent to `display:none` (to hide an element).
+Another example is the property `mso-hide:all`, which is equivalent to `display:none` (to hide an element). (One difference worth noting is that `mso-hide:all` won’t cascade to children tables. So if you want to hide a table and all the tables nested in it, you will need to repeat `mso-hide:all` on every table.)
+
+Stig Morten Myre has a great article explaining [how to fix bugs with Outlook specific CSS](https://cm.engineering/fixing-bugs-with-outlook-specific-css-f4b8ae5be4f4), including tips on how to use `mso-text-raise` or `mso-line-height-rule: exactly`.
 
 ## VML
 
