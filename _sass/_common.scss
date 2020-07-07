@@ -62,7 +62,7 @@ a.title,
 	padding: rem(64px) rem(20px);
 	color: #fff;
 	font-size: rem(20px);
-	background-color: rgba(0, 0, 0, 0.84);
+	background-color: #292929;
 
 	@media only screen and (min-width: rem(1280px)) {
 		margin: 0 calc((50vw - 50%) * -1);
@@ -86,9 +86,30 @@ a.title,
 // Posts list
 .posts-list-item {
 	margin-bottom: rem(16px);
+	list-style: none;
+
+	a {
+		margin-right: 1ch;
+	}
 
 	time {
 		display: block;
-		font-size: rem(20px);
+		color: #777;
+		font-size: rem(16px);
 	}
+}
+
+// Background
+.page::after {
+	content: '';
+	position: absolute;
+	top: 0;
+	bottom: 0;
+	left: rem(724px);
+	right: 0;
+	height: 100%;
+	max-width: rem(512px);
+	background-color: #f2f2f2;
+	//background-image: url(/assets/images/slice.png);
+	z-index: -1;
 }
