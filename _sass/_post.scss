@@ -54,6 +54,10 @@
 		margin-bottom: rem(16px);
 		border-left: rem(8px) solid #f2f2f2;
 		padding-left: rem(16px);
+
+		& > *:not(:last-child) {
+			margin-bottom: rem(16px);
+		}
 	}
 
 	.figure--large {

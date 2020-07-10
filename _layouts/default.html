@@ -16,19 +16,25 @@
 <body>
 	<div class="page{{ page.name | split: '.' | first | slugify | default: 'default' | prepend: ' page--' }}">
 		<header class="header" role="banner">
-			{%- if page.url == "/" -%}
-				<h1 class="title">{{ site.title }}</h1>
-			{%- else -%}
-				<a href="/" class="title">{{ site.title }}</a>
+			{%- if page.url != "/" -%}
+				<a href="/" class="title">
 			{%- endif -%}
+			<img class="logo" src="{{ site.url }}/assets/images/icon.png" alt="{{ site.title }}" width="75" height="75" />
+			{%- if page.url != "/" -%}
+				</a>
+			{%- endif -%}
+			<nav class="nav" role="navigation">
+				<a href="/about/"{% if page.url == "/about/" %} class="current"{% endif %}>About</a>
+				<a href="/blog/"{% if page.url == "/blog/" %} class="current"{% endif %}>Blog</a>
+				<a href="/work/"{% if page.url == "/work/" %} class="current"{% endif %}>Work with me</a>
+			</nav>
 		</header>
 		<main role="main" class="main">
 			{{ content }}
 		</main>
 		<footer class="footer" role="contentinfo">
-			<p><b>HTeuMeuLeu by Rémi Parmentier</b></p>
-			<p>French email and web developer working at <a href="https://www.tilt-studio.fr">Tilt Studio</a>.</p>
-			<p>Source code available on <a href="https://github.com/hteumeuleu/hteumeuleu.com">GitHub</a>.</p>
+			<p><b>HTeuMeuLeu</b> by Rémi Parmentier.</p>
+			<p>Follow me on <a href="https://www.twitter.com/HTeuMeuLeu">Twitter</a>, <a href="https://www.github.com/hteumeuleu/">GitHub</a> or <a href="https://www.youtube.com/c/HTeuMeuLeu">Youtube</a>.</p>
 		</footer>
 	</div>
 </body>
