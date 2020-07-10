@@ -1,5 +1,6 @@
 ---
 title:  "Making sense of Outlook’s rendering engine"
+favorite: true
 ---
 
 In 2007, Apple introduced the first iPhone. The same year, Microsoft introduced Outlook 2007 on Windows and its brand new HTML and CSS rendering engine: **Word**. It makes a lot of sense from an authoring point of view. But let’s just say to keep things polite that Word is not very good at rendering HTML and CSS. And while Outlook on macOS, iOS or Android all use WebKit or Blink as a rendering engine, even the latest release on Windows (Outlook 2019) still uses Word. In 2007, the iPhone paved the way for a mobile future while Outlook doomed HTML emails to use deprecated code and weird quirks forever.
