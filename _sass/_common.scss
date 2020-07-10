@@ -1,14 +1,6 @@
-.alert {
-	padding: rem(13px);
-	color: #856404;
-	background-color: #fff3cd;
-	border-color: #856404;
-}
-
 //
 // Page
 //
-.header,
 .main,
 .footer {
 	margin: rem(30px) 0;
@@ -36,51 +28,20 @@
 	font-size: rem(20px);
 }
 
-.header {
-	display: flex;
-	align-items: flex-end;
-	justify-content: space-between;
-	width: 100%;
-	min-height: rem(96px);
-}
-
-.title {
-	margin-bottom: rem(16px);
-	font-weight: 600;
-	font-size: rem(26px);
-	line-height: rem(32px);
-}
-
-a.title,
-.title > a {
-	text-decoration: none;
-}
-
 // Footer
 .footer {
-	margin: 0 rem(-20px);
-	padding: rem(64px) rem(20px);
-	color: #fff;
-	font-size: rem(20px);
-	background-color: #292929;
+	font-size: rem(16px);
 
-	@media only screen and (min-width: rem(1280px)) {
-		margin: 0 calc((50vw - 50%) * -1);
-		padding: rem(64px) calc((50vw - 50%));
+	&::before {
+		content: '';
+		display: block;
+		margin: rem(48px) 0;
+		width: 8ch;
+		max-width: 100%;
+		height: 1px;
+		border: none;
+		background-color: currentColor;
 	}
-}
-
-// Logo
-.title::before {
-	content: '';
-	display: inline-block;
-	width: rem(75px);
-	height: rem(75px);
-	margin-right: rem(16px);
-	vertical-align: bottom;
-	background-image: url(/assets/images/icon.png);
-	background-repeat: no-repeat;
-	background-size: cover;
 }
 
 // Posts list
@@ -99,6 +60,17 @@ a.title,
 	}
 }
 
+.posts-list-item--favorite::before {
+	content: '\2605';
+	display: inline-block;
+	text-align: right;
+	width: rem(16px);
+	font-size: rem(16px);
+	margin-left: rem(-24px);
+	margin-right: rem(4px);
+	color: #777;
+}
+
 // Background
 .page::after {
 	content: '';
@@ -111,8 +83,13 @@ a.title,
 	max-width: rem(512px);
 	background-color: #f2f2f2;
 	//background-image: url(/assets/images/slice.png);
-	//background-image: url(https://i.imgur.com/w5xxAzv.jpg); background-size: 1024px auto;
+	background-image: url(https://i.imgur.com/w5xxAzv.jpg); background-size: 1024px auto;
 	//background-image: url(https://i.imgur.com/tDCj7oH.jpg); background-size: 1024px auto;
 	//background-image: url(https://i.imgur.com/zwYyPqW.jpg); // Mario
 	z-index: -1;
+}
+
+// Intro
+.intro {
+	margin-bottom: rem(32px);
 }
