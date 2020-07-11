@@ -2,6 +2,7 @@
 title: Email and Web Development Blog
 permalink: /blog/
 ---
+<div class="post">
 <p class="intro">Here are all the articles in english I wrote from 2016 to today. Those marked with a star are my personal favorite. I hope you will enjoy them too.</p>
 {% assign latest-posts = site.posts | sort:"date" | reverse  %}
 {% assign current-year = -1  %}
@@ -18,3 +19,4 @@ permalink: /blog/
 <li class="posts-list-item{% if post.favorite == true %} posts-list-item--favorite{% endif %}"><a href="{{ post.url }}">{{ post.title | markdownify | remove: '<p>' | remove: '</p>' | strip }}</a><time datetime="{{ post.date | date_to_xmlschema}}">{{ post.date | date: '%B %d, %Y' }}</time></li>
 {% endfor %}
 </ul>
+</div>

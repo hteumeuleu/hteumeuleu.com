@@ -45,9 +45,12 @@
 }
 
 // Posts list
+.page--blog .post .posts-list {
+	margin-top: 0;
+}
+
 .posts-list-item {
 	margin-bottom: rem(16px);
-	list-style: none;
 
 	a {
 		margin-right: 1ch;
@@ -58,17 +61,25 @@
 		color: #777;
 		font-size: rem(16px);
 	}
+
+	&::marker {
+		color: #777;
+	}
 }
 
-.posts-list-item--favorite::before {
-	content: '\2605';
-	display: inline-block;
-	text-align: right;
-	width: rem(16px);
-	font-size: rem(16px);
-	margin-left: rem(-24px);
-	margin-right: rem(4px);
-	color: #777;
+.posts-list-item--favorite {
+	list-style: none;
+
+	&::before {
+		content: '\2605';
+		display: inline-block;
+		text-align: right;
+		width: rem(16px);
+		font-size: rem(16px);
+		margin-left: rem(-20px);
+		margin-right: rem(4px);
+		color: #777;
+	}
 }
 
 // Background
