@@ -11,6 +11,10 @@
 .logo {
 	width: rem(64px);
 	height: rem(64px);
+
+	@media (prefers-color-scheme: dark) {
+		outline: rem(4px) solid #fff;
+	}
 }
 
 .nav {
@@ -25,7 +29,7 @@
 		text-decoration: none;
 		text-transform: capitalize;
 		border-radius: rem(4px);
-		border: 2px solid #fff;
+		border: 2px solid transparent;
 
 		@media (max-width: rem(600px)) {
 			text-align: right;
@@ -48,6 +52,10 @@
 
 		&:focus:not(:active):not(:hover) {
 			border-color: #111;
+
+			@media (prefers-color-scheme: dark) {
+				border-color: #fff;
+			}
 		}
 	}
 

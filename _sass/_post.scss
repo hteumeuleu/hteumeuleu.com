@@ -40,6 +40,11 @@
 		padding: rem(16px);
 		line-height: 1.4;
 		overflow: auto;
+
+		@media (prefers-color-scheme: dark) {
+			border: 1px solid #38383d;
+		}
+
 	}
 
 	img {
@@ -105,6 +110,10 @@
 .post-subtitle {
 	font-size: rem(24px);
 	color: rgba(0, 0, 0, 0.54);
+
+	@media (prefers-color-scheme: dark) {
+		color: #d7d7db;
+	}
 }
 
 .alert {

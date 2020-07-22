@@ -18,6 +18,11 @@ body {
 	overflow-x: hidden;
 	overflow-y: scroll;
 	background-color: #fff;
+
+	@media (prefers-color-scheme: dark) {
+		color: #fff;
+		background: #232323;
+	}
 }
 
 img {
@@ -31,10 +36,18 @@ a {
 .main {
 	a:focus, a:active, button:focus, button:active {
 		background-color: #c0e1f1;
+
+		@media (prefers-color-scheme: dark) {
+			background-color: #0c0c0d;
+		}
 	}
 
 	a:visited {
 		color: rebeccapurple;
+
+		@media (prefers-color-scheme: dark) {
+			color: #b98eff;
+		}
 	}
 }
 
@@ -62,6 +75,10 @@ figcaption {
 	color: rgba(0, 0, 0, 0.54);
 	text-align: left;
 	font-size: 0.75em;
+
+	@media (prefers-color-scheme: dark) {
+		color: #d7d7db;
+	}
 }
 
 pre:focus-within {
