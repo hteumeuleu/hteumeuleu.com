@@ -66,7 +66,6 @@ We can also append a version number to target only a specific Outlook version. N
 <!--[if mso 12]>
 <p>This is Outlook 2007.</p>
 <![endif]-->
-
 <!--[if mso 14]>
 <p>This is Outlook 2010.</p>
 <![endif]-->  
