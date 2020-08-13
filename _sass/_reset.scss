@@ -38,7 +38,8 @@ a {
 		background-color: #c0e1f1;
 
 		@media (prefers-color-scheme: dark) {
-			background-color: #0c0c0d;
+			outline-color: #0088cc;
+			background-color: #608a9b;
 		}
 	}
 
@@ -47,6 +48,10 @@ a {
 
 		@media (prefers-color-scheme: dark) {
 			color: #b98eff;
+
+			&:focus, &:active {
+				color: #eee3ff;
+			}
 		}
 	}
 }
