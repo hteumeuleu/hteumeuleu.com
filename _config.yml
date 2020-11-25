@@ -1,7 +1,6 @@
 title: "HTeuMeuLeu"
 url: "https://www.hteumeuleu.com"
 description: "The homepage of french email developer Rémi Parmentier."
-markdown: GFM
 
 defaults:
   - scope:
