@@ -1,8 +1,8 @@
 ---
-title:  "Fonts in HTML emails"
+title: "Fonts in HTML emails"
 ---
 
-There is no such thing as a “safe font” in HTML emails. There, I said it. I’ve seen so many posts asking for safe fonts to use in HTML emails, usually answered with a reduced list of fonts available on Windows. So let me explain why safe fonts is a deprecated concept and how much more there can be to fonts in HTML emails than _Arial_ and _Times_.
+There is no such thing as a “safe font” in HTML emails. There, I said it. I’ve seen so many posts asking for safe fonts to use in HTML emails, usually answered with a reduced list of fonts available on Windows. So let me explain why safe fonts is a fallacious concept and how much more there can be to fonts in HTML emails than _Arial_ and _Times_.
 
 Fonts in an HTML email can come from **four different sources**:
 
@@ -10,6 +10,8 @@ Fonts in an HTML email can come from **four different sources**:
 2. User fonts
 3. Email Client fonts
 4. Embedded fonts
+
+Let’s talk about each of those.
 
 ## 1. System Fonts
 
@@ -23,7 +25,7 @@ macOS Catalina provides a staggering amount of 520 preinstalled fonts. iOS 13 fo
 
 Android is a special case because there’s not one true version of Android. Default fonts will vary if you have a Samsung, Xiaomi, or Google device. While Apple and Microsoft provide very clear lists of the default fonts installed on their systems, I haven't been able to find such a list for any maker of Android devices. (Google only has a list from way back to [Android 4.1](https://developer.android.com/about/versions/android-4.1.html#Fonts)).
 
-With so little fonts available on Android, it should be clear now why “safe fonts” make little to no sense. Even _Arial_ or _Times New Roman_ are absent from Android.
+With so little fonts available on Android, it should be clear now why talking about “safe fonts” make little to no sense. Even _Arial_ or _Times New Roman_ are absent from Android.
 
 ## 2. User Fonts
 
@@ -37,6 +39,10 @@ Email clients can also come with their own fonts. This is true for native applic
 
 ## 4. Embedded Fonts
 
+Email developers can embed fonts from a distant server on their HTML emails, just like on the web. Does it work everywhere? No, [just like on the web](https://caniuse.com/fontface).
+
 <iframe src="https://embed.caniemail.com/css-at-font-face/" width="640" height="420" style="width:100%; max-width:640px; border:none;" loading="lazy"></iframe>
+
+Why don’t more email clients support embedded fonts? I can’t speak for them. But my guess is it all comes down to security. Font files are nothing more than little executable software in themselves. And just like any software, they’re vulnerable and can thus bring their vulnerabilities into any software that embeds them. ([See this StackExchange thread](https://security.stackexchange.com/questions/91347/how-can-a-font-be-used-for-privilege-escalation) for a lot of examples.)
 
 ---
