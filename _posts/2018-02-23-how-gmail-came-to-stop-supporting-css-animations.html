@@ -2,63 +2,63 @@
 title:  "How Gmail came to stop supporting CSS animations"
 date:   2018-02-23 15:07:02 +0200
 ---
-<h2 id="faf3">How Gmail came to stop supporting CSS animations</h2>
-<p id="3691">Did you know that not so long ago, Gmail supported CSS animations? Well, sort of. Up until June 2016, the desktop webmail of Gmail supported CSS <code>@keyframes</code> declarations. So you could declare the following animation in a <code>&lt;style&gt;</code> tag in the <code>&lt;head&gt;</code> of your email, and Gmail would keep it intact.</p>
+<p>Did you know that not so long ago, Gmail supported CSS animations? Well, sort of. Up until June 2016, the desktop webmail of Gmail supported CSS <code>@keyframes</code> declarations. So you could declare the following animation in a <code>&lt;style&gt;</code> tag in the <code>&lt;head&gt;</code> of your email, and Gmail would keep it intact.</p>
 
-<pre id="5d28"><code>@keyframes <strong>foo</strong> {<br> from { background:red; }<br> to { background:black; }<br>}</code></pre>
+<pre><code>@keyframes <strong>foo</strong> {<br> from { background:red; }<br> to { background:black; }<br>}</code></pre>
 
-<p id="6c7b">The problem is that, in itself, such a declaration is useless. In order to call an animation in CSS, you need the actual <code>animation</code> CSS property.</p>
+<p>The problem is that, in itself, such a declaration is useless. In order to call an animation in CSS, you need the actual <code>animation</code> CSS property.</p>
 
-<pre id="8df8"><code>&lt;div style=&quot;animation:<strong>foo</strong> linear 1s;&quot;&gt;&lt;/div&gt;</code></pre>
+<pre><code>&lt;div style=&quot;animation:<strong>foo</strong> linear 1s;&quot;&gt;&lt;/div&gt;</code></pre>
 
-<p id="bfa3">But Gmail didn’t support the <code>animation</code> property. So that was all pretty pointless. I shared <a href="https://twitter.com/search?l=&amp;q=keyframes%20from%3Ahteumeuleu&amp;src=typd" rel="noopener">my frustration a few times on Twitter</a>, without thinking too much about it.</p>
+<p>But Gmail didn’t support the <code>animation</code> property. So that was all pretty pointless. I shared <a href="https://twitter.com/search?l=&amp;q=keyframes%20from%3Ahteumeuleu&amp;src=typd" rel="noopener">my frustration a few times on Twitter</a>, without thinking too much about it.</p>
 
-<p id="8eb1">Later that year, in may of 2016, I was fiddling around in Gmail <a href="https://emails.hteumeuleu.com/trying-to-make-sense-of-gmail-css-support-e88cd7995cea" rel="noopener">trying to make sense of its CSS support</a>. And I realized that instead of being pointless, the <code>@keyframes</code> support could be a real security issue.</p>
+<p>Later that year, in may of 2016, I was fiddling around in Gmail <a href="https://emails.hteumeuleu.com/trying-to-make-sense-of-gmail-css-support-e88cd7995cea" rel="noopener">trying to make sense of its CSS support</a>. And I realized that instead of being pointless, the <code>@keyframes</code> support could be a real security issue.</p>
 
-<p id="36c2">Because Gmail was not just supporting CSS <code>@keyframes</code> declarations. It was keeping the name of the declaration <em>intact</em>. This meant that, theoretically, you could override any CSS animation that the webmail used. And while Gmail is pretty sober in terms of visible animations, it still uses quite a few.</p>
-<p id="2031">I wrote <a href="https://gist.github.com/hteumeuleu/89e93c95b08bf85e72a2fa59b936fd33" rel="noopener">a small script</a> to get all the elements that have an <code>animation</code> style, and got a dozen of result. Those animations were referencing about as much <code>@keyframes</code> declarations. Most of these animations were only called during very specific actions in the interface of Gmail, outside of an email view. But one of them, named <code>gb__a</code>, was quite interesting.</p>
+<p>Because Gmail was not just supporting CSS <code>@keyframes</code> declarations. It was keeping the name of the declaration <em>intact</em>. This meant that, theoretically, you could override any CSS animation that the webmail used. And while Gmail is pretty sober in terms of visible animations, it still uses quite a few.</p>
+<p>I wrote <a href="https://gist.github.com/hteumeuleu/89e93c95b08bf85e72a2fa59b936fd33" rel="noopener">a small script</a> to get all the elements that have an <code>animation</code> style, and got a dozen of result. Those animations were referencing about as much <code>@keyframes</code> declarations. Most of these animations were only called during very specific actions in the interface of Gmail, outside of an email view. But one of them, named <code>gb__a</code>, was quite interesting.</p>
 
-<pre id="e7ab"><code>@keyframes gb__a {<br> 0%  { opacity:0 }<br> 50% { opacity:1 }<br>}</code></pre>
+<pre><code>@keyframes gb__a {<br> 0%  { opacity:0 }<br> 50% { opacity:1 }<br>}</code></pre>
 
-<p id="c7c8">This animation uses the <code>opacity</code> property to create a fading effect. It is used in the upper right hand corner of Gmail when you open the little pop ups with your app, your notifications or your account information.</p>
+<p>This animation uses the <code>opacity</code> property to create a fading effect. It is used in the upper right hand corner of Gmail when you open the little pop ups with your app, your notifications or your account information.</p>
 
-<figure id="501a">
-	<img alt="" src="https://cdn-images-1.medium.com/max/800/1*-4229OB3ZEz0aRvoHMXDWQ.gif"><figcaption>A fade in animation when you click on “Your notification” in the top right hand of Gmail. In practice, this animation only lasts 0.2 second, so you might have never even noticed it.</figcaption>
+<figure>
+	<img alt="" src="/uploads/2018/02/gmail-fade-in-animation.gif" width="700" height="200">
+	<figcaption>A fade in animation when you click on “Your notification” in the top right hand of Gmail. In practice, this animation only lasts 0.2 second, so you might have never even noticed it.</figcaption>
 </figure>
-<p id="a3d0">This was perfect! This meant that for the split moment this animation was playing, I could apply any styles that Gmail allowed. I could change the width and height of that element, change its background color, and apply a background image to display some content.</p>
-<p id="94f6">At that moment, I knew that what I found was pretty serious. Having read other stories of email security like <a href="http://freshinbox.com/blog/how-i-helped-make-office-365-a-little-safer/" rel="noopener">this one by Justin Khoo</a>, I was definitely willing to report this. Turns out Google has a handy and memorable URL to report vulnerabilities: <a href="http://goo.gl/vulnz" rel="noopener">goo.gl/vulnz</a>. After reading tips from Google to <a href="https://sites.google.com/site/bughunteruniversity/improve" rel="noopener">write a good bug report</a> (and <a href="https://sites.google.com/site/bughunteruniversity/nonvuln" rel="noopener">what doesn’t qualify as a bug</a>), I <a href="https://gist.github.com/hteumeuleu/87a0d296648bea3488416f2ad04b9f31#file-gmail-animation-hack" rel="noopener">made a prototype of an email</a> to show how the vulnerability could be exploited. I imitated Google’s email design to make a somewhat convincing notification email inviting a recipient to click on the top right hand icons.</p>
+<p>This was perfect! This meant that for the split moment this animation was playing, I could apply any styles that Gmail allowed. I could change the width and height of that element, change its background color, and apply a background image to display some content.</p>
+<p>At that moment, I knew that what I found was pretty serious. Having read other stories of email security like <a href="http://freshinbox.com/blog/how-i-helped-make-office-365-a-little-safer/" rel="noopener">this one by Justin Khoo</a>, I was definitely willing to report this. Turns out Google has a handy and memorable URL to report vulnerabilities: <a href="http://goo.gl/vulnz" rel="noopener">goo.gl/vulnz</a>. After reading tips from Google to <a href="https://sites.google.com/site/bughunteruniversity/improve" rel="noopener">write a good bug report</a> (and <a href="https://sites.google.com/site/bughunteruniversity/nonvuln" rel="noopener">what doesn’t qualify as a bug</a>), I <a href="https://gist.github.com/hteumeuleu/87a0d296648bea3488416f2ad04b9f31#file-gmail-animation-hack" rel="noopener">made a prototype of an email</a> to show how the vulnerability could be exploited. I imitated Google’s email design to make a somewhat convincing notification email inviting a recipient to click on the top right hand icons.</p>
 
-<figure id="ca7d">
-	<img alt="" src="https://cdn-images-1.medium.com/max/800/1*esJGwP-r0kreOZ5Uu9y9mw.png" />
+<figure>
+	<img alt="" src="/uploads/2018/02/gmail-animation-hack-demo.png" width="700" height="472" />
 	<figcaption>The email I sent to Google along my Vulnerability Report.</figcaption>
 </figure>
 
-<p id="78bd">And if you clicked on any of the top right icons, here’s what you would see.</p>
+<p>And if you clicked on any of the top right icons, here’s what you would see.</p>
 
-<figure id="57a3">
-	<img alt="" src="https://cdn-images-1.medium.com/max/1200/1*-xeXnIMvlKiO_zYjCNvWgQ.gif">
+<figure>
+	<img alt="" src="/uploads/2018/02/gmail-hack.gif" width="1200" height="673">
 </figure>
 
-<p id="eeb6">I reported this on May 20, 2016, and immediately received an automated response. Three days later, I got a personal response from a Google employee that they were looking into it. Two days after, I received another personal response asking me to send the test email to a specific address.</p>
-<p id="a64f">And then, on June 7, I received the following email:</p>
+<p>I reported this on May 20, 2016, and immediately received an automated response. Three days later, I got a personal response from a Google employee that they were looking into it. Two days after, I received another personal response asking me to send the test email to a specific address.</p>
+<p>And then, on June 7, I received the following email:</p>
 
-<blockquote id="08a2">Hello,
+<blockquote>Hello,<br>
 
-Thank you for reporting this bug. As part of Google’s Vulnerability Reward Program, the panel has decided to issue a reward of $1337.
+Thank you for reporting this bug. As part of Google’s Vulnerability Reward Program, the panel has decided to issue a reward of $1337.<br>
 
-[…]
+[…]<br>
 
 Regards,<br>Google Security Bot</blockquote>
 
-<p id="d7e2">That was such a pleasant surprise. This is still to this day probably one of my proudest email geek achievement.</p>
+<p>That was such a pleasant surprise. This is still to this day probably one of my proudest email geek achievement.</p>
 
-<p id="ad66">A few days later, Gmail started filtering all <code>@keyframes</code> declarations. And that’s how Gmail came to stop supporting CSS animations.</p>
+<p>A few days later, Gmail started filtering all <code>@keyframes</code> declarations. And that’s how Gmail came to stop supporting CSS animations.</p>
 
 <hr />
 
-<p id="4de5">I wanted to tell this story two years after because I think it’s still a good example how important security is in the email world.</p>
+<p>I wanted to tell this story two years after because I think it’s still a good example how important security is in the email world.</p>
 
 <ul>
-	<li id="3766">Google is taking Gmail security very seriously. This is visible at multiple levels, from their <a href="https://goo.gl/vulnz" rel="noopener">memorable report URL</a> to their financial reward. My experience with Google has been in huge contrast to <a href="https://emails.hteumeuleu.com/thinking-outside-the-table-at-tedc16-a58a76c7c625#0f95" rel="noopener">one of my previous experience</a> with another email client where I was almost laughed at for much more serious issues. If you’re an email client maker, you should <em>want</em> the good guys (and girls) to report an issue. So you should make everything in your power to make reporting bugs easy and attractive so that people <em>want</em> to take some of their time to report you an issue.</li>
-	<li id="18c6">In a webmail, a lot of CSS features can become vulnerabilities. There’s a good chance that CSS <code>@keyframes</code> didn’t even exist at the time Gmail’s parser was written. This doesn’t mean that <code>@keyframes</code> and <code>animation</code> can’t be supported safely in a webmail. But a webmail should always be cautious about what they support. Thus, a restrictive black list (that only allows a subset of styles) is still the best way to go. We might never see the same level of support of CSS in emails than on the Web, and it’s probably a good thing.</li>
+	<li>Google is taking Gmail security very seriously. This is visible at multiple levels, from their <a href="https://goo.gl/vulnz" rel="noopener">memorable report URL</a> to their financial reward. My experience with Google has been in huge contrast to <a href="https://emails.hteumeuleu.com/thinking-outside-the-table-at-tedc16-a58a76c7c625#0f95" rel="noopener">one of my previous experience</a> with another email client where I was almost laughed at for much more serious issues. If you’re an email client maker, you should <em>want</em> the good guys (and girls) to report an issue. So you should make everything in your power to make reporting bugs easy and attractive so that people <em>want</em> to take some of their time to report you an issue.</li>
+	<li>In a webmail, a lot of CSS features can become vulnerabilities. There’s a good chance that CSS <code>@keyframes</code> didn’t even exist at the time Gmail’s parser was written. This doesn’t mean that <code>@keyframes</code> and <code>animation</code> can’t be supported safely in a webmail. But a webmail should always be cautious about what they support. Thus, a restrictive black list (that only allows a subset of styles) is still the best way to go. We might never see the same level of support of CSS in emails than on the Web, and it’s probably a good thing.</li>
 </ul>
