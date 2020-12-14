@@ -1,23 +1,14 @@
 https://emails.hteumeuleu.com/* https://www.hteumeuleu.com/:splat 301!
 
 # Archives and tags
-/archive/2019/*			/2019/
-/archive/2018/*			/2018/
-/archive/2017/*			/2017/
-/archive/2016/*			/2016/
-/@hteumeuleu/			/about/
-/latest/						/	302
-/archive/						/	302
-/trending/						/	302
-/about/							/	302
-/tagged/css/					/	302
-/tagged/email-design/			/	302
-/tagged/email-marketing/		/	302
-/tagged/email-development/		/	302
-/tagged/emailgeeks/				/	302
-/tagged/web-development/		/	302
-/tagged/front-end-development/	/	302
-/tagged/email/					/	302
+/@hteumeuleu/	/about/
+/latest/		/		302
+/archive/		/		302
+/archive/*		/blog/
+/trending/		/		302
+/about/			/		302
+/search/		/		302
+/tagged/*		/		302
 
 # Posts
 /outlook-is-not-an-email-client-2ef3462380f		/2020/outlook-is-not-an-email-client/
