@@ -39,7 +39,7 @@ Email clients can also come with their own fonts. This is true for native applic
 
 ## 4. Embedded Fonts
 
-Email developers can embed fonts from a distant server on their HTML emails, just like on the web. Does it work everywhere? No, [just like on the web](https://caniuse.com/fontface).
+Email developers can embed fonts from a distant server on their HTML emails, just like on the web. Does it work everywhere? [No](https://www.caniemail.com/features/css-at-font-face/), [just like on the web](https://caniuse.com/fontface).
 
 <iframe title="Can I email… @font-face" src="https://embed.caniemail.com/css-at-font-face/" width="640" height="420" style="width:100%; max-width:40rem; height:26.25rem; border:none;" loading="lazy"></iframe>
 
@@ -52,3 +52,7 @@ Why don’t more email clients support embedded fonts? I can’t speak for them.
 * If you use a `@font-face` declaration, include the properties `mso-generic-font-family` and `mso-font-alt` to better control the fallback font in _The Outlooks_ on Windows. (You can [read about the day I learned about `mso-generic-font-family`](/2019/today-i-learned-about-mso-generic-font-family/).)
 * [Font Style Matcher](https://meowni.ca/font-style-matcher/) by [Monica Dinculescu](https://twitter.com/notwaldorf) is a great tool to find a fallback font not too different from the web font you want to use.
 * [Font Family Reunion](http://fontfamily.io/) by [Zach Leat](https://twitter.com/zachleat) is a great tool to see which system font you’ll get from a `font-family` font stack.
+
+<div class="alert">
+   This post was published today in french as part of “<a href="https://www.24jours.email" lang="fr" hreflang="fr"><em>24jours.email</em></a>”, an advent calendar blog on email marketing. Read “<a href="https://www.24jours.email/2020/11/18/les-polices-dans-les-e-mails-html/" lang="fr" hreflang="fr"><em>Les polices dans les e-mails HTML</em></a>” and check out the rest of the calendar!
+</div>
