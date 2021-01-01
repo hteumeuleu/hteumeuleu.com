@@ -11,6 +11,8 @@ defaults:
 
 permalink: /:year/:title/
 
+highlighter: rouge
+
 plugins:
   - jekyll-mentions
 
