@@ -26,23 +26,37 @@ Sizes defined in pixels won’t be adjusted when Outlook is rendering at 120 dpi
 
 ## background-position
 
-In VML, [`background-position`](https://developer.mozilla.org/en-US/docs/Web/CSS/background-position) can be replicated using the [`origin` attribute](https://docs.microsoft.com/en-us/windows/win32/vml/origin-attribute--fill--vml) and the [`position` attribute](https://docs.microsoft.com/en-us/windows/win32/vml/position-attribute--fill--vml). Both attributes require two coordinates (x and y), separated by a space or a comma. Each coordinate is a fraction value (between 0 and 1) relative to the width and height of the image for the `position` attribute, and relative to the width and height of the VML shape for the `origin` attribute. The coordinates move from the top left of the VML shape for the `origin` attribute, while they move from the center of the image for the `position` attribute.
+In VML, [`background-position`](https://developer.mozilla.org/en-US/docs/Web/CSS/background-position) can be replicated using the [`origin` attribute](https://docs.microsoft.com/en-us/windows/win32/vml/origin-attribute--fill--vml) and the [`position` attribute](https://docs.microsoft.com/en-us/windows/win32/vml/position-attribute--fill--vml). I found [Microsoft’s documentation](https://docs.microsoft.com/en-us/windows/win32/vml/msdn-online-vml-fill-element) and [the official VML specification](https://www.w3.org/TR/NOTE-VML) super confusing about those attributes, sometimes not reflecting my experience with them at all. So here’s my own practical understanding on how these work in _the Outlooks_.
+
+Both attributes require two coordinates (x and y), separated by a space or a comma. Each coordinate is a fraction value relative to the width and height (between 0 and 1) of the image for the `origin` attribute, and of the VML shape for the `position` attribute. The coordinates move from the top left of the VML shape for the `position` attribute, while they move from the center of the image for the `origin` attribute.
+
+I like to picture myself the fill as an extra layer inside the VML shape. That layer takes the exact same size as the VML shape itself. The `position` attribute will move that entire layer inside the shape, with values being relative to the shape's size (from 0 to 1). The `origin` attribute will move the image inside that layer from its center, with values being relative to the image's size (from 0 to 1).
 
 <figure>
 <a href="/uploads/2021/01/vml-origin-position-coordinates.png"><img src="/uploads/2021/01/vml-origin-position-coordinates.png" alt="" width="800" height="630" /></a>
+<figcaption>Visual representation of my understanding of coordinates for the <code>position</code> and <code>origin</code> attributes with a <code>type="frame"</code> fill in VML.</figcaption>
 </figure>
 
-For example, for a `64x64` image inside a `600x300` VML shape, setting the `position` attribute to `1,1` would
+For example, if we wanted to move a `64x64` image to the bottom right of a `600x300` VML shape, we’d first define the `position` to `0.5, 0.5`. This would move the entire fill layer half the size of the shape horizontally (`300px`) and vertically (`150px`). This would make the actual image partially visible in the bottom right corner. In order to make it reappear completely, we’d then define the `origin` attribute to `0.5, 0.5`. This would move the background image itself half its size horizontally (`32px`) and vertically (`32px`).
 
+<figure>
+<a href="/uploads/2021/01/vml-background-image-bottom-right.png"><img src="/uploads/2021/01/vml-background-image-bottom-right.png" alt="" width="800" height="464" /></a>
+<figcaption>The <code>position</code> attribute moves the fill layer (in blue) while the <code>origin</code> attribute moves the background image itself (in red).</figcaption>
+</figure>
 
-With a non repeated background image (`type="frame"` in VML), you can define the image background position .
+### Non repeated background image
+
+With a non repeated background image (`type="frame"` in VML), here are different equivalent to usual values in CSS.
 
 * `origin="-0.5,-0.5" position="-0.5,-0.5"` equals `top left`
 * `origin="0.5,-0.5" position="0.5,-0.5"` equals `top right`
 * `origin="-0.5,0.5" position="-0.5,0.5"` equals `bottom left`
 * `origin="0.5,0.5" position="0.5,0.5"` equals `bottom right`
 
-We need to imagine the fill as an extra layer inside the VML shape. That layer takes the exact same size as the VML shape itself. The `position` attribute will move that entire layer inside the shape, with values from 0 to 1 being relative to the shape's size. The `origin` attribute will move the image inside that layer from its center, with values from 0 to 1 being relative to the image's size.
+
+### Repeated background image
+
+TK 
 
 Full example:
 
