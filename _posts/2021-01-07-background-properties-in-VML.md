@@ -4,11 +4,11 @@ title:  "Background properties in VML"
 
 I recently got to do some research around VML background images. And here’s what I learnt about simulating background CSS properties like `background-repeat`, `background-size` and `background-position` in VML.
 
-But first, a bit of background (_ha_) about the basics of VML and background images. 
+But first, a bit of background (_ha_) about the basics of VML and background images.
 
 ## Basics
 
-VML is supported in _The Outlooks_ on Windows using Word’s rendering engine (from 2007 to 2019). In order to use it, you need to declare the VML namespace in your code (`xmlns:v="urn:schemas-microsoft-com:vml"`). You can do this for every VML element you'll use 
+VML is supported in _The Outlooks_ on Windows using Word’s rendering engine (from 2007 to 2019). In order to use it, you need to declare the VML namespace in your code (`xmlns:v="urn:schemas-microsoft-com:vml"`). You can do this inline for every VML element you will use.
 
 ```xml
 <v:rect xmlns:v="urn:schemas-microsoft-com:vml">
@@ -21,7 +21,7 @@ _Or_ you can declare it once and for all as an attribute of the `<html>` element
 <html lang="en" xmlns:v="urn:schemas-microsoft-com:vml">
 ```
 
-You can then use any VML shape like  [`<v:rect>`](https://docs.microsoft.com/en-us/windows/win32/vml/msdn-online-vml-rect-element) or [`<v:oval>`](https://docs.microsoft.com/en-us/windows/win32/vml/msdn-online-vml-oval-element). We will use the `stroked="false"` attribute to remove the default border around VML shapes and a `style` attribute to define the `width` and `height` of the shape.
+You can then use any VML shape like  [`<v:rect>`](https://docs.microsoft.com/en-us/windows/win32/vml/msdn-online-vml-rect-element) or [`<v:oval>`](https://docs.microsoft.com/en-us/windows/win32/vml/msdn-online-vml-oval-element). We will use the `stroked="false"` attribute to remove the default border around VML shapes and a `style` attribute to define the `width` and `height` of the shape. (One VML oddity is that attributes like `stroked` or `filled` can also be written `stroke` or `fill`. I tend to prefer the former because it matches Microsoft documentation, even though the latter matches [the VML specification](https://www.w3.org/TR/NOTE-VML).)
 
 ```xml
 <v:rect stroked="false" style="width:600px;height:300px;">
@@ -46,6 +46,8 @@ We can then include our HTML foreground content inside a [`<v:textbox>`](https:/
   </v:textbox>
 </v:rect>
 ```
+
+If we want the background to adjust to the content, we can omit the `height` declaration on the `<v:rect>` element and apply a `style="mso-fit-shape-to-text:true;"` to the `<v:textbox>` element.
 
 Because VML is only supported in _The Outlooks_ (and versions of Internet Explorer 9 and below), I always wrap VML code between [conditional comments](https://docs.microsoft.com/en-us/previous-versions/windows/internet-explorer/ie-developer/compatibility/ms537512(v%3dvs.85)) for Outlook using the `[if mso]` expression. It’s also worth mentioning that there is an `[if vml]` expression, which would target all rendering engines supporting VML (like _The Outlooks_ and IE9 and below).
 
@@ -93,6 +95,9 @@ As far as I know, it is not possible to simply define an equivalent to the CSS v
   <v:fill type="frame" src="https://i.imgur.com/pmS2PDm.png" color="#add5f7" />
 </v:rect>
 ```
+
+Using a `type="frame"` value will make the image fit the entire shape by default. Fortunately this is something we can manage with the following section.
+
 
 ## background-size
 
