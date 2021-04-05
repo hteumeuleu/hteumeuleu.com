@@ -82,6 +82,8 @@ And voilà! We now have an HTML email that reacts to Outlook.com’s own dark an
     <figcaption>A screenshot of an email in light mode (left) and dark mode (right), both while Outlook.com and the operating system are set up in dark mode.</figcaption>
 </figure>
 
+Here’s [the full code for the email above](https://codepen.io/hteumeuleu/pen/ZEBrJbp?editors=1000).
+
 I’m aware that this technique might be a bit too hacky and not for every emails. My biggest fear is that this would ultimately remove support for Gmail (if Gmail were ever to support `@media (prefers-color-scheme:dark)` as rumored [almost a year ago](https://github.com/hteumeuleu/email-bugs/issues/68#issuecomment-629411633)).
 
-But for now I think I like it and it adds a nice touch.
+But for now, I think I like it.
