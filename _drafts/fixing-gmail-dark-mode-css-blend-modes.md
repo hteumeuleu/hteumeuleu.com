@@ -88,6 +88,8 @@ A blend operation takes a “_source color_” and blends it with a “_backdrop
 
 We can use blend modes [in Photoshop](https://helpx.adobe.com/photoshop/using/blending-modes.html). And we can use blend modes in CSS thanks to two properties: [`background-blend-mode`](https://developer.mozilla.org/en-US/docs/Web/CSS/background-blend-mode) and [`mix-blend-mode`](https://developer.mozilla.org/en-US/docs/Web/CSS/mix-blend-mode). Both are [equally supported in Gmail](https://www.caniemail.com/search/?s=blend-mode). But because our primary goal here is to maintain text color, we’ll only use `mix-blend-mode`.
 
+<a href="https://www.caniemail.com/features/css-mix-blend-mode/"><img src="https://screenshots.caniemail.com/css-mix-blend-mode.png" alt="Can I email… mix-blend-mode" width="640" height="400" style="vertical-align:middle; border:0; max-width:100%; height:auto;" /></a>
+
 If you want to learn more about blend modes in CSS, I highly recommend to read the following articles:
 
 * [Blending Modes in CSS](https://ishadeed.com/article/blending-modes-css/), by Ahmad Shadeed
@@ -99,7 +101,7 @@ If you want to learn more about blend modes in CSS, I highly recommend to read t
 The first blend that occurs in our code is a `difference`. By the [W3C specification](https://drafts.fxtf.org/compositing-1/#valdef-blend-mode-difference) definition, a `difference` blend mode “_subtracts the darker of the two constituent colors from the lighter color_”. Mathematically, the result is the absolute value of the difference between our source color (`Cs`) and our backdrop color (`Cb`).
 
 ```js
-B(Cb, Cs) =|Cb - Cs|
+B(Cb, Cs) = |Cb - Cs|
 ```
 
 If we get back to our code, this blend mode will occur between our black text on a white background (as transformed by Gmail) and its parent white background.
@@ -112,7 +114,7 @@ If we get back to our code, this blend mode will occur between our black text on
 </div>
 ```
 
-Mathematically, this means that our black text from the source () becomes…
+Mathematically, this means that our black text from the source becomes…
 
 ```js
 |Cb - Cs| = |rgb(255,255,255) - rgb(0,0,0)|
@@ -231,21 +233,79 @@ B(Cb, Cs) = Cb + Cs - (Cb * Cs)
 </div>
 ```
 
-The only problem here is that this code would apply to any email client, including those that don’t support CSS blend modes. We need to make sure that this code only applies in Gmail.
+The only problem here is that this code would apply to any email client. And for those that don’t support `mix-blend-mode`, only the black background would show. We need to make sure that this code only applies in Gmail.
 
 ## 4. Targeting Gmail
 
-TODO
+The hack to target Gmail has been well known for years (and is referenced on [HowToTarget.email](https://howtotarget.email/)). There are two requirements for it to work:
 
-[HowToTarget.email](https://howtotarget.email/)
+1. Have a doctype at the top of your HTML code (ex: `<!DOCTYPE html>`)
+2. Add a dedicated class to the `<body>` element (ex: `<body class="body">`)
 
+Then you can target any class name in your code (ex: `.foo`) with the selector below:
+
+```css
+u + .body .foo { }
 ```
-u + .body .foo
+
+The reason this works is because Gmail replaces the doctype of an email with a `<u></u>` element. So the base email code below…
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>An HTML email</title>
+    <style>u + .body .text { color:green; }</style>
+</head>
+<body class="body">
+    <p class="text">ELO world!</p>
+</body>
+</html>
 ```
+
+…becomes:
+
+```html
+<div id=":8p" class="a3s aiL msg4142466614215349360">
+    <u></u>
+    <div class="m_4142466614215349360body">
+        <p class="m_4142466614215349360text">
+            ELO world!
+        </p>
+    </div>
+</div>
+```
+
+With the CSS selector also adequatly being prefixed into:
+
+```css
+.msg6240499631687324626 u+.m_6240499631687324626body .m_6240499631687324626text { color:green }
+```
+
+So, going back to our code, we will move the two blend mode and background inline styles in a dedicated `<style>` element. (And we’ll make sure to have a doctype set and a `.body` class.)
+
+```html
+<style>
+    u + .body .gmail-blend-screen { background:#000; mix-blend-mode:screen; }
+    u + .body .gmail-blend-difference { background:#000; mix-blend-mode:difference; }
+</style>
+```
+
+```html
+<div style="background:#639; background-image:linear-gradient(#639,#639); color:#fff;">
+    <div class="gmail-blend-screen">
+        <div class="gmail-blend-difference">
+            Lorem ipsum dolor, sit amet, consectetur adipisicing elit.
+        </div>
+    </div>
+</div>
+```
+
+An unexpected but welcome side effect of separating the blend styles like this is that it gracefully falls back in the Gmail Apps with Non Google Accounts. In <abbr title="Gmail Apps with Non Google Accounts">GANGA</abbr> (as email geeks like to call it), [`mix-blend-mode` is not supported](https://www.caniemail.com/features/css-mix-blend-mode/). But [neither are `<style>` elements](https://www.caniemail.com/features/html-style/). So in that case, Gmail will just apply its regular color adjustment.
 
 ## 5. Final code
 
-TODO
+Here’s a full code example with everything up in place.
 
 ```html
 <!DOCTYPE html>
@@ -263,7 +323,9 @@ TODO
     <div style="background:#639; background-image:linear-gradient(#639,#639); color:#fff;">
         <div class="gmail-blend-screen">
             <div class="gmail-blend-difference">
+                <!-- Your content starts here -->
                 Lorem ipsum dolor, sit amet, consectetur adipisicing elit.
+                <!-- Your content ends here -->
             </div>
         </div>
     </div>
@@ -271,6 +333,16 @@ TODO
 </html>
 ```
 
+I also made a sort of [test card](https://en.wikipedia.org/wiki/Test_card) email to try out different background colors. You can find [the code here](https://lab.hteumeuleu.com/dark-mode-blend/).
+
+<figure>
+    <a href="https://lab.hteumeuleu.com/dark-mode-blend/"><img alt="" src="/uploads/2021/04/gmail-ios-test-card.jpg" width="375" height="667"></a>
+    <figcaption>A screenshot of a <a href="https://lab.hteumeuleu.com/dark-mode-blend/">test card</a> in Gmail iOS in dark mode. On top, with the fix, the white color and background colors are always maintained. On the bottom, without the fix, the colors are changed by Gmail.</figcaption>
+</figure>
+
+
 ## Conclusion
 
-TODO
+I believe dark mode can be a major advancement in accessibility and user preference. And as I stated [two years ago](/2019/dealing-with-outlook-com-s-dark-mode/), “_the best you can do is to embrace this choice instead to try and go against it_”. But it’s also important to acknowledge when email clients mess up.
+
+I’m super excited to have come with this solution. And while it’s still limited (the blending limits it to white text only), I hope it’ll be of good help to anyone struggling with Gmail’s dark mode. 
