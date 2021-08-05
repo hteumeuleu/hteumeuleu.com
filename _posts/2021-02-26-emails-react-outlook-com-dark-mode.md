@@ -60,7 +60,7 @@ And when Outlook.com changes an element’s color, it will add a custom data att
 * `data-ogsc` (for “_original style color_”)
 * `data-ogac` (for “_original attribute color_”)
 * `data-ogsb` (for “_original style background_”)
-* `data-ogac` (for “_original attribute background_”)
+* `data-ogab` (for “_original attribute background_”)
 
 Using once again an attribute selector, we can target when Outlook.com has changed an element’s color and apply our own custom styles. But because [Outlook.com only supports attribute selector](https://www.caniemail.com/features/css-selector-attribute/) solo (`[attr]`) or with an element selector (`E[attr]`), we can not simply use a selector like `.email-background[data-ogsb]`. 
 
