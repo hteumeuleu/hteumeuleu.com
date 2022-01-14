@@ -1,0 +1,36 @@
+.page--work {
+	&::after {
+		content: none;
+	}
+
+	.post-intro {
+		margin-bottom: rem(32px);
+	}
+
+	.post-intro h1 {
+		display: block;
+		line-height: 1;
+		font-size: 4em;
+		font-weight: bold;
+		font-family: Montserrat, Arial Black, sans-serif;
+		text-transform: uppercase;
+
+		@media only screen and (max-width: rem(672px)) {
+			font-size: calc(((80 - 16) * 100vw / 672) + 1rem);
+		}
+
+		@media only screen and (max-width: rem(450px)) {
+			font-size: 2em;
+		}
+	}
+
+	.figure--grid {
+		@media only screen and (max-width: rem(672px)) {
+			display: block;
+
+			& > *:not(:last-child) {
+				margin-bottom: rem(16px);
+			}
+		}
+	}
+}
