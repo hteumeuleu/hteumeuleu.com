@@ -34,7 +34,7 @@ a {
 }
 
 .main {
-	a:focus, a:active, button:focus, button:active {
+	a:not([class]):focus, a:not([class]):active, button:not([class]):focus, button:not([class]):active {
 		background-color: #c0e1f1;
 
 		@media (prefers-color-scheme: dark) {
@@ -43,7 +43,7 @@ a {
 		}
 	}
 
-	a:visited {
+	a:not([class]):visited {
 		color: rebeccapurple;
 
 		@media (prefers-color-scheme: dark) {

@@ -1,16 +1,26 @@
 ---
-title: Work with Rémi Parmentier and Tilt Studio — HTML Email and Web Developer
+title: Remote HTML Email Developer Rémi Parmentier
 permalink: /work/
 ---
 <div class="post">
-    <p>
-        Oh hi! My name is Rémi Parmentier and I’m an…
+    <img class="avatar" src="/uploads/2022/01/avatar.png" alt="Rémi Parmentier" />
+    <p class="oh-hi">
+        Oh hi! My name is <strong>Rémi Parmentier</strong> and I’m an…
     </p>
     <div class="post-intro">
         <h1>Email Developer</h1>
     </div>
     <p>
-        I coded my first email in 2006. And in 2008, I co-founded my own web development agency in France: <a href="https://www.tilt-studio.fr">Tilt Studio</a>. 
+        You may remember me from websites like <a href="https://caniemail.com"><em>CanIEmail.com</em></a>, articles like <a href="/2016/the-fab-four-technique-to-create-responsive-emails-without-media-queries/"><em>The Fab Four Technique</em></a> or conferences like <a href="/2016/thinking-outside-the-table-at-litmus-live-2016/"><em>Thinking Outside the &lt;table&gt;</em></a>.
+    </p>
+    <p>
+        I coded my first email in 2006. In 2008, I co-founded my own web development agency in France: <a href="https://www.tilt-studio.fr">Tilt Studio</a>.
+    </p>
+    <p>
+        If you’re interested to work with me, if you wanna just say <em>hi</em> or talk about anything related to emails, please get in touch at <a href="mailto:rparmentier@tilt-studio.fr">rparmentier@tilt-studio.fr</a>.
+    </p>
+    <p>
+        <a href="mailto:rparmentier@tilt-studio.fr" class="button">Contact Rémi Parmentier</a>
     </p>
     <h2>
         Here are a few examples of emails I worked on.
@@ -18,6 +28,9 @@ permalink: /work/
     <div class="figure--grid">
         <div>
             <h3>Bulletin</h3>
+            <div class="card">
+                <a href="https://www.tilt-studio.fr"><img class="card-image" src="/uploads/2022/01/tilt-studio-fr.png" alt="" width="600" height="315" /></a>
+            </div>
             <p>
                 I coded the template for the french news media <a href="https://bulletin.fr/">Bulletin.fr</a>. Including an interactive quiz that even works in webmails like Yahoo! Mail or Outlook.com. Thought out and tested as dark mode ready. Got <a href="https://reallygoodemails.com/emails/-welcome-to-bulletin">featured on Really Good Emails</a>.
             </p>
@@ -30,6 +43,12 @@ permalink: /work/
         </div>
     </div>
     <h2>About Tilt Studio</h2>
+    <div class="card">
+        <a href="https://www.tilt-studio.fr"><img class="card-image" src="/uploads/2022/01/tilt-studio-fr.png" alt="" width="600" height="315" /></a>
+    </div>
+    <p>
+        Tilt Studio is a small team of four front-end and back-end web developers.
+    </p>
     <p>
         We build hand crafted web sites. We work with clients on maintaining their sites and coding their commercial operations. We code responsive and interactive emails. And we also provide code audits and HTML emails workshops. Overall, we care about accessibility and web performance.
     </p>
@@ -43,6 +62,6 @@ permalink: /work/
         We’re working at the office or at home, monday to friday, from 9am to 6pm (Paris time). <b>We respect those hours</b>, for us, for our employees, but also for our closed ones.
     </p>
     <p>
-        If you’re interested to work with me, please get in touch at: <a href="mailto:rparmentier@tilt-studio.fr">rparmentier@tilt-studio.fr</a>.
+        <a href="https://www.tilt-studio.fr" class="button">Visit tilt-studio.fr</a>
     </p>
 </div>

@@ -104,3 +104,34 @@
 .intro {
 	margin-bottom: rem(32px);
 }
+
+// Buttons
+.button {
+	display: inline-block;
+	cursor: pointer;
+	min-height: rem(50px);
+	padding: rem(13px) rem(32px);
+	color: #36382b;
+	font-size: rem(16px);
+	font-weight: 600;
+	line-height: rem(24px);
+	text-decoration: none;
+	text-transform: uppercase;
+	text-align: center;
+	border-radius: rem(10px);
+	background: #e2e9af;
+	transition: background .1s ease-in-out;
+	border: rem(2px) solid #e2e9af;
+	margin-left: rem(-5px);
+
+	&:focus, &:active {
+		outline-color: #a0c30f;
+	}
+
+	&:focus, &:hover  { background: #d1dc8b; border-color: #d1dc8b; }
+	&:active { transform: translateY(2px); }
+
+	&:visited {
+		color: #36382b;
+	}
+}
