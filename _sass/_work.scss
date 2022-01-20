@@ -1,7 +1,4 @@
 .page--work {
-	&::after {
-		content: none;
-	}
 
 	.avatar {
 		float: left;
@@ -60,6 +57,10 @@
 		gap: rem(20px);
 		grid-template-columns: 1fr 1fr;
 
+		h3 {
+			margin-bottom: 0.5em;
+		}
+
 		@media only screen and (max-width: rem(672px)) {
 			display: block;
 
@@ -81,7 +82,14 @@
 	width: 100%;
 	max-height: rem(200px);
 	object-fit: cover;
-	border: none;
+
+	.post & {
+		border: none;
+	}
+
+	.figure--grid & {
+		object-position: center top;
+	}
 }
 
 .card-text {

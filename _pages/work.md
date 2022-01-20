@@ -17,10 +17,10 @@ permalink: /work/
         I coded my first email in 2006. In 2008, I co-founded my own web development agency in France: <a href="https://www.tilt-studio.fr">Tilt Studio</a>.
     </p>
     <p>
-        If you’re interested to work with me, if you wanna just say <em>hi</em> or talk about anything related to emails, please get in touch at <a href="mailto:rparmentier@tilt-studio.fr">rparmentier@tilt-studio.fr</a>.
+        If you’re interested to work with me, if you wanna just say <em>hi</em> or talk about anything related to emails, please get in touch at <a href="mailto:remi@hteumeuleu.fr">remi@hteumeuleu.fr</a>.
     </p>
     <p>
-        <a href="mailto:rparmentier@tilt-studio.fr" class="button">Contact Rémi Parmentier</a>
+        <a href="mailto:remi@hteumeuleu.fr" class="button">Contact Rémi Parmentier</a>
     </p>
     <h2>
         Here are a few examples of emails I worked on.
@@ -28,18 +28,33 @@ permalink: /work/
     <div class="figure--grid">
         <div>
             <h3>Bulletin</h3>
-            <div class="card">
-                <a href="https://www.tilt-studio.fr"><img class="card-image" src="/uploads/2022/01/tilt-studio-fr.png" alt="" width="600" height="315" /></a>
-            </div>
             <p>
                 I coded the template for the french news media <a href="https://bulletin.fr/">Bulletin.fr</a>. Including an interactive quiz that even works in webmails like Yahoo! Mail or Outlook.com. Thought out and tested as dark mode ready. Got <a href="https://reallygoodemails.com/emails/-welcome-to-bulletin">featured on Really Good Emails</a>.
             </p>
         </div>
         <div>
+            <div class="card">
+                <img class="card-image" src="/uploads/2022/01/bulletin.png" alt="" width="390" height="240" />
+                <div class="card-text">
+                    <p class="card-url"><a class="card-link" href="/uploads/2022/01/bulletin.20211213.html">Bulletin #57 - December 2021</a></p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="figure--grid">
+        <div>
             <h3>Opquast</h3>
             <p>
                 I designed and coded the template for the monthly newsletter of <a href="https://www.opquast.com/en/">Opquast</a>, the Web Quality and UX checklist. Minimalist, text-based design, and features a complete dark mode support.
             </p>
+        </div>
+        <div>
+            <div class="card">
+                <img class="card-image" src="/uploads/2022/01/opquast.png" alt="" width="390" height="240" />
+                <div class="card-text">
+                    <p class="card-url"><a class="card-link" href="/uploads/2022/01/opquast.20211202.html">Opquast #86 - December 2021</a></p>
+                </div>
+            </div>
         </div>
     </div>
     <h2>About Tilt Studio</h2>
