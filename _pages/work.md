@@ -17,10 +17,10 @@ permalink: /work/
         I coded my first email in 2006. In 2008, I co-founded my own web development agency in France: <a href="https://www.tilt-studio.fr">Tilt Studio</a>.
     </p>
     <p>
-        If you’re interested to work with me, if you wanna just say <em>hi</em> or talk about anything related to emails, please get in touch at <a href="mailto:remi@hteumeuleu.fr">remi@hteumeuleu.fr</a>.
+        If you’re interested to work with me, get in touch at <a href="mailto:rparmentier@tilt-studio.fr">rparmentier@tilt-studio.fr</a>.
     </p>
     <p>
-        <a href="mailto:remi@hteumeuleu.fr" class="button">Contact Rémi Parmentier</a>
+        <a href="mailto:rparmentier@tilt-studio.fr" class="button">Contact Rémi Parmentier</a>
     </p>
     <h2>
         Here are a few examples of emails I worked on.
@@ -57,6 +57,13 @@ permalink: /work/
             </div>
         </div>
     </div>
+    <h2>Social Credits</h2>
+    <ul>
+        <li><a href="https://twitter.com/hteumeuleu">Twitter</a></li>
+        <li><a href="https://github.com/hteumeuleu">GitHub</a></li>
+        <li><a href="https://stackoverflow.com/users/13463421/hteumeuleu">Stack Overflow</a></li>
+        <li><a href="https://www.linkedin.com/in/r%C3%A9mi-parmentier-94044923/">LinkedIn</a></li>
+    </ul>
     <h2>About Tilt Studio</h2>
     <div class="card">
         <a href="https://www.tilt-studio.fr"><img class="card-image" src="/uploads/2022/01/tilt-studio-fr.png" alt="" width="600" height="315" /></a>
