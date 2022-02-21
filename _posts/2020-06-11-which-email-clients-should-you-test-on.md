@@ -22,4 +22,4 @@ There's [a quote by Ethan Marcotte](https://ethanmarcotte.com/wrote/left-to-our-
 
 This applies extremely well to emails. **Your email's only as strong as the weakest email client you've tested it on.**
 
-Start to make your email look good in the worst email client your want to support. And then ensure it's still good, or even make it better, if more capable email clients. If you take a look at [Can I email's scoreboard](https://www.caniemail.com/scoreboard/), you can take this as starting to test clients at the bottom of the ranking. And then make make your way to the top.
+Start to make your email look good in the worst email client you want to support. And then ensure it's still good, or even make it better, in more capable email clients. If you take a look at [Can I email's scoreboard](https://www.caniemail.com/scoreboard/), you can take this as starting to test clients at the bottom of the ranking. And then make make your way to the top.
