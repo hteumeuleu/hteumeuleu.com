@@ -89,6 +89,12 @@
 	figure {
 		margin-top: rem(48px);
 		margin-bottom: rem(48px);
+
+		iframe {
+			max-width: 100%;
+			height: auto;
+			aspect-ratio: 4 / 3;
+		}
 	}
 
 	figcaption {
