@@ -30,7 +30,24 @@ end
 
 # Using the crank
 
-Using an animator
+I really wanted this game to support the crank. So I thought it could be fun to be able to use the crank instead of the d-Pad to move tiles around. Moving the crank up would move the tiles up. Moving the crank towards you would move the tiles left. And so on.
+
+And to be able to visualize what the crank is doing, I wanted to have a little cursor moving around the grid. This is basically about moving a sprite around on specific coordinates. And in order to do this, I used… an [Animator](https://sdk.play.date/1.12.3/#C-graphics.animator)! According to the docs, animators are “_lightweight objects that keep track of animation progress. They can animate between two numbers, two points, along a line segment, arc, or polygon_”.
+
+So first I created a `polygon` representing the outline of the grid. And then I created an `animator` using this `polygon` and set to a duration of 360.
+
+```lua
+self.animator = playdate.graphics.animator.new(360, {polygon}, playdate.easingFunctions.linear)
+```
+
+Then, all I have to do is get the crank current absolute position and get the animator value at that angle.
+
+```lua
+local angle = playdate.getCrankPosition()
+self.animator:valueAtTime(angle + 45)
+```
+
+I used a `+ 45` here because I created my polygon from the top left. But the angle of the crank starts from the top center.
 
 # My first bug report
 
