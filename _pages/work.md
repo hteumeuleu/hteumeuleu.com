@@ -11,16 +11,16 @@ permalink: /work/
         <h1>Email Developer</h1>
     </div>
     <p>
-        You may remember me from websites like <a href="https://caniemail.com"><em>CanIEmail.com</em></a>, articles like <a href="/2016/the-fab-four-technique-to-create-responsive-emails-without-media-queries/"><em>The Fab Four Technique</em></a> or conferences like <a href="/2016/thinking-outside-the-table-at-litmus-live-2016/"><em>Thinking Outside the &lt;table&gt;</em></a>.
+        I run the website <a href="https://caniemail.com">CanIEmail.com</a>, I write articles like <a href="/2016/the-fab-four-technique-to-create-responsive-emails-without-media-queries/">The Fab Four Technique</a> and give conferences like <a href="/2016/thinking-outside-the-table-at-litmus-live-2016/">Thinking Outside the &lt;table&gt;</a>.
     </p>
     <p>
-        I coded my first email in 2006. In 2008, I co-founded my own web development agency in France: <a href="https://www.tilt-studio.fr">Tilt Studio</a>.
+        I coded my first email in 2006. In 2008, I co-founded my own web development agency in France: <a href="https://www.tilt-studio.fr">Tilt Studio</a>. I like to create <a href="https://github.com/hteumeuleu/email-lab">fun experimental emails</a>, big email systems and simple, well-coded emails.
     </p>
     <p>
-        If you’re interested to work with me, get in touch at <a href="mailto:rparmentier@tilt-studio.fr">rparmentier@tilt-studio.fr</a>.
+        If you’re interested to work with me at Tilt Studio, get in touch at <a href="mailto:rparmentier@tilt-studio.fr">rparmentier@tilt-studio.fr</a>.
     </p>
     <p>
-        <a href="mailto:rparmentier@tilt-studio.fr" class="button">Contact Rémi Parmentier</a>
+        <a href="mailto:rparmentier@tilt-studio.fr" class="button">Contact me</a>
     </p>
     <h2>
         Here are a few examples of emails I worked on.
@@ -29,7 +29,7 @@ permalink: /work/
         <div>
             <h3>Bulletin</h3>
             <p>
-                I coded the template for the french news media <a href="https://bulletin.fr/">Bulletin.fr</a>. Including an interactive quiz that even works in webmails like Yahoo! Mail or Outlook.com. Thought out and tested as dark mode ready. Got <a href="https://reallygoodemails.com/emails/-welcome-to-bulletin">featured on Really Good Emails</a>.
+                I coded the template for the french news media <a href="https://bulletin.fr/">Bulletin.fr</a>. Including an interactive quiz that works in webmails like Yahoo! Mail or Outlook.com. Built for forced dark modes. Got <a href="https://reallygoodemails.com/emails/-welcome-to-bulletin">featured on Really Good Emails</a>.
             </p>
         </div>
         <div>
@@ -57,13 +57,6 @@ permalink: /work/
             </div>
         </div>
     </div>
-    <h2>Social Credits</h2>
-    <ul>
-        <li><a href="https://twitter.com/hteumeuleu">Twitter</a></li>
-        <li><a href="https://github.com/hteumeuleu">GitHub</a></li>
-        <li><a href="https://stackoverflow.com/users/13463421/hteumeuleu">Stack Overflow</a></li>
-        <li><a href="https://www.linkedin.com/in/r%C3%A9mi-parmentier-94044923/">LinkedIn</a></li>
-    </ul>
     <h2>About Tilt Studio</h2>
     <div class="card">
         <a href="https://www.tilt-studio.fr"><img class="card-image" src="/uploads/2022/01/tilt-studio-fr.png" alt="" width="600" height="315" /></a>
@@ -86,4 +79,14 @@ permalink: /work/
     <p>
         <a href="https://www.tilt-studio.fr" class="button">Visit tilt-studio.fr</a>
     </p>
+    <h2>Social Credits</h2>
+    <p>
+        You can find me on the following social networks.
+    </p>
+    <ul>
+        <li><a href="https://mastodon.social/@HTeuMeuLeu">Mastodon</a></li>
+        <li><a href="https://github.com/hteumeuleu">GitHub</a></li>
+        <li><a href="https://stackoverflow.com/users/13463421/hteumeuleu">Stack Overflow</a></li>
+        <li><a href="https://www.linkedin.com/in/r%C3%A9mi-parmentier-94044923/">LinkedIn</a></li>
+    </ul>
 </div>

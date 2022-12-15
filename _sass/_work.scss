@@ -16,6 +16,8 @@
 	}
 
 	.oh-hi {
+		margin-bottom: 0;
+
 		@media only screen and (max-width: rem(672px)) {
 			display: table-cell;
 			height: rem(128px);
