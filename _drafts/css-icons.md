@@ -1,0 +1,72 @@
+---
+title:  "Drawing CSS icons for fun… and dark mode"
+---
+
+Last year, I offered my help to redesign one of my favorite newsletter: [Switch Weekly](https://switchweekly.com/), curated by [Chris Brandrick](https://mastodon.social/@brandrick). As a Nintendo fan, I figured this was perhaps the closest I could ever get to work on a Nintendo related newsletter. This was also a great opportunity to try and experiment new things without a dreadly deadline.
+
+I wanted to add little sparks of fun throughout the newsletter. And I thought about using an icon before the start of the introduction.
+
+![A screenshot of the newsletter intro with a newspaper icon right before the text.](/uploads/2023/02/switch-weekly-icon.png)
+
+This looked simple and nice enough. Except when you viewed it in dark mode.
+
+![The same screenshot as before but now in dark mode. The dark outlined icon is now dark on a dark background.](/uploads/2023/02/switch-weekly-icon-buggy.png)
+
+The *by default* dark icon on a light background now became dark on a dark background, making it almost invisible. Now I could make a second light version of the icon, wrap it in an `srcset` in a `<picture>` element bound to a dark mode media query. And I could use `data-ogsb` attributes to provide additional support in Outlook.com and Outlook mobile apps. But this would end up in a behemoth of code that would still fail in some key clients (hello Gmail apps!).
+
+So I wondered if this little icon could be drawn in CSS.
+
+## CSS Drawings
+
+I’ve always had mixed feelings about CSS drawings. I’m admirative of the cuteness and clever techniques of [Lynn Fisher](https://lynnandtonic.com/)’s [A Single Div](https://a.singlediv.com/) for example. And I’m frankly mind blown by the work of [Diana Smith](https://diana-adrianne.com/) in her *pure CSS* art like [Francine](https://diana-adrianne.com/purecss-francine/). But I’ve never found any real use case for these myself.
+
+<figure class="figure">
+<a href="https://diana-adrianne.com/#portfolio"><img src="/uploads/2023/02/diana-smith-css-art.jpg" alt="" width="1253" height="835" /></a>
+<figcaption>A gallery of HTML/CSS drawings by Diana Smith. Yes, this was done with just HTML and CSS.</figcaption>
+</figure>
+
+The techniques involved are also very intimidating to me: CSS transforms, CSS gradients, absolute positioning… This almost feels like the list of things not usually supported by email clients.
+
+But my little newspaper icon was simple enough that I knew I could do it with more basic styles.
+
+## First attempt
+
+* Using `background` fails as the color changes with no control. We lack a `currentbackgroundcolor` keyword in CSS.
+* Using borders can be a problem as they are not changed in dark mode in Outlook.
+* But using borders with `currentcolor` solves the problem!
+
+
+## Principles for CSS Drawings in HTML Emails
+
+* Set `font-size:1em` on every single element.
+* Restrict properties to `display`, `width`, `height`, `margin`, `padding`, `border`.
+* Do not define colors.
+
+---
+
+https://codepen.io/hteumeuleu/pen/porJdjR
+
+https://github.com/hteumeuleu/switchweekly
+
+https://github.com/hteumeuleu/switchweekly/blob/main/src/components/icon-edition.html
+
+https://switchweekly.com/issue/290
+
+```html
+<!-- Start Icon:Edition -->
+<span style="margin-right:0.2em; font-size:20px; display:inline-block; vertical-align:middle;" role="presentation">
+	<span style="font-size:1em; display:block; border:0.1em solid; border-radius:0 0 0.1em 0.1em; pointer-events:none;">
+		<span style="font-size:1em; display:block; padding:0.1em 0.1em 0.25em;">
+			<span style="font-size:1em; display:table;">
+				<span style="font-size:1em; display:table-cell; width:0.2em; border-bottom:0.25em solid;"></span>
+				<span style="font-size:1em; display:table-cell; padding-left:0.05em;">
+					<span style="font-size:1em; display:block; margin-bottom:0.05em; width:0.35em; border-bottom:0.1em solid;"></span>
+					<span style="font-size:1em; display:block; width:0.35em; border-bottom:0.1em solid;"></span>
+				</span>
+			</span>
+		</span>
+	</span>
+</span>
+<!-- End Icon:Edition -->
+
+```
