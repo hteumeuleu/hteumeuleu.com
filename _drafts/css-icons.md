@@ -12,7 +12,7 @@ This looked simple and nice enough. Except when you viewed it in dark mode.
 
 ![The same screenshot as before but now in dark mode. The dark outlined icon is now dark on a dark background.](/uploads/2023/02/switch-weekly-icon-buggy.png)
 
-The *by default* dark icon on a light background now became dark on a dark background, making it almost invisible. Now I could make a second light version of the icon, wrap it in an `srcset` in a `<picture>` element bound to a dark mode media query. And I could use `data-ogsb` attributes to provide additional support in Outlook.com and Outlook mobile apps. But this would end up in a behemoth of code that would still fail in some key clients (hello Gmail apps!).
+The *by default* dark icon on a light background now became dark on a dark background, making it almost invisible. Now I could make a second light version of the icon, wrap it in an `srcset` in a `<picture>` element bound to a dark mode media query. And I could use `data-ogsb` attributes to provide additional support in Outlook.com and Outlook mobile apps. But this would end up in a behemoth of code that would still fail in some key clients (hello Gmail apps!). (You can see [an example of this technique here](https://codepen.io/hteumeuleu/pen/porJdjR).)
 
 So I wondered if this little icon could be drawn in CSS.
 
