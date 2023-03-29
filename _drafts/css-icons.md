@@ -31,12 +31,30 @@ But my little newspaper icon was simple enough that I knew I could do it with mo
 
 ## First attempt
 
+<figure class="figure">
+<img src="/uploads/2023/03/css-icon-firefox-devtools.png" alt="" width="1024" height="768" />
+<figcaption>A screenshot of my CSS icon in Firefox with devtools opened.</figcaption>
+</figure>
+
+My first attempt consisted in a bunch of nested elements. I went with `<span>`s to keep the semantics neutral, all while implying this would be usable as an `inline` element. I added a `role="presentation"` to the main wrapping `<span>`, considering this icon to be completely decorative and not requiring a proper textual alternative.
+
+I applied a `font-size:1em` to every inner element to make sure the drawing could be scaled based on the main current `font-size`. I then used only `em`s inside the icon to make this possible. So for example, having a border of `0.1em` with a `font-size:20px` would make the border `2px` large.
+
+Then I used a mix of basic CSS properties to layout the different shapes within the icon: `display`, `width`, `height`, `margin`, `padding`, `border` and `background-color`. The problem with mixing `border` and `background` colors in CSS is that they’re not treated equally when it comes to dark mode.
+
+In Outlook.com for example, `border` colors are always left untouched while text `color` or `background-color` are forced to different colors in dark mode.
+
+<figure class="figure">
+<img src="/uploads/2023/03/icon-in-outlook-com.png" alt="" width="768" height="240" />
+<figcaption>A screenshot of the Switch Weekly newsletter viewed in dark mode in Outlook.com.</figcaption>
+</figure>
+
 * Using `background` fails as the color changes with no control. We lack a `currentbackgroundcolor` keyword in CSS.
 * Using borders can be a problem as they are not changed in dark mode in Outlook.
 * But using borders with `currentcolor` solves the problem!
 
 
-## Principles for CSS Drawings in HTML Emails
+## Principles for coding CSS icons in HTML Emails
 
 * Set `font-size:1em` on every single element.
 * Restrict properties to `display`, `width`, `height`, `margin`, `padding`, `border`.
@@ -54,7 +72,7 @@ https://switchweekly.com/issue/290
 
 ```html
 <!-- Start Icon:Edition -->
-<span style="margin-right:0.2em; font-size:20px; display:inline-block; vertical-align:middle;" role="presentation">
+<span style="margin-right:0.2em; font-size:1.25em; display:inline-block; vertical-align:middle;" role="presentation">
 	<span style="font-size:1em; display:block; border:0.1em solid; border-radius:0 0 0.1em 0.1em; pointer-events:none;">
 		<span style="font-size:1em; display:block; padding:0.1em 0.1em 0.25em;">
 			<span style="font-size:1em; display:table;">
@@ -68,5 +86,4 @@ https://switchweekly.com/issue/290
 	</span>
 </span>
 <!-- End Icon:Edition -->
-
 ```
