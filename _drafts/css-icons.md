@@ -18,36 +18,87 @@ So I wondered if this little icon could be drawn in CSS.
 
 ## CSS Drawings
 
-I’ve always had mixed feelings about CSS drawings. I’m admirative of the cuteness and clever techniques of [Lynn Fisher](https://lynnandtonic.com/)’s [A Single Div](https://a.singlediv.com/) for example. And I’m frankly mind blown by the work of [Diana Smith](https://diana-adrianne.com/) in her *pure CSS* art like [Francine](https://diana-adrianne.com/purecss-francine/). But I’ve never found any real use case for these myself.
+I’ve always been in awe in front of CSS drawings. I’m admirative of the cuteness and clever techniques of [Lynn Fisher](https://lynnandtonic.com/)’s [A Single Div](https://a.singlediv.com/) for example. And I’m frankly mind blown by the work of [Diana Smith](https://diana-adrianne.com/) in her *pure CSS* art like [Francine](https://diana-adrianne.com/purecss-francine/). But I’ve never found any real use case for these myself.
 
 <figure class="figure">
 <a href="https://diana-adrianne.com/#portfolio"><img src="/uploads/2023/02/diana-smith-css-art.jpg" alt="" width="1253" height="835" /></a>
 <figcaption>A gallery of HTML/CSS drawings by Diana Smith. Yes, this was done with just HTML and CSS.</figcaption>
 </figure>
 
-The techniques involved are also very intimidating to me: CSS transforms, CSS gradients, absolute positioning… This almost feels like the list of things not usually supported by email clients.
+The techniques involved feel very intimidating to me: CSS transforms, CSS gradients, absolute positioning… This almost feels like the list of things not usually supported by email clients.
 
-But my little newspaper icon was simple enough that I knew I could do it with more basic styles.
+But my little newspaper icon was simple enough that I felt I could do it with more basic styles.
 
-## First attempt
+## How I did it
+
+My first attempt consisted in a bunch of nested `<span>`. I went with `<span>`s to keep the semantics neutral, all while implying this would be usable as an `inline` element. I added a `role="presentation"` to the main wrapping `<span>`, considering this icon to be completely decorative and not requiring a proper textual alternative. I used one `<span>` for each shape within the icon, eventually grouping two or more in another `<span>` when it made things easier to layout.
 
 <figure class="figure">
 <img src="/uploads/2023/03/css-icon-firefox-devtools.png" alt="" width="1024" height="768" />
 <figcaption>A screenshot of my CSS icon in Firefox with devtools opened.</figcaption>
 </figure>
 
-My first attempt consisted in a bunch of nested elements. I went with `<span>`s to keep the semantics neutral, all while implying this would be usable as an `inline` element. I added a `role="presentation"` to the main wrapping `<span>`, considering this icon to be completely decorative and not requiring a proper textual alternative.
+One thing I wanted early on was to make sure the CSS icon could scale to any size depending on the current `font-size`. So I applied a `font-size:1em` to every inner element. I then used only `em` units inside the icon, may it be for `width`, `height`, `padding` or `border`. So for example, having a border of `0.1em` with a current `font-size` of `20px` would make the border `2px` large. Increasing the `font-size` to `40px` would automatically scale that border to `4px`.
 
-I applied a `font-size:1em` to every inner element to make sure the drawing could be scaled based on the main current `font-size`. I then used only `em`s inside the icon to make this possible. So for example, having a border of `0.1em` with a `font-size:20px` would make the border `2px` large.
+Then I used a mix of basic CSS properties to layout the different shapes within the icon: `display`, `width`, `height`, `margin`, `padding`, `border` and `background-color`. At this point the entire code for the CSS icon looked like this.
 
-Then I used a mix of basic CSS properties to layout the different shapes within the icon: `display`, `width`, `height`, `margin`, `padding`, `border` and `background-color`. The problem with mixing `border` and `background` colors in CSS is that they’re not treated equally when it comes to dark mode.
+```html
+<span style="margin-right:0.2em; font-size:1.25em; display:inline-block; vertical-align:middle;" role="presentation">
+	<span style="font-size:1em; display:block; border:0.1em solid #000; border-radius:0 0 0.1em 0.1em;">
+		<span style="font-size:1em; display:block; padding:0.1em 0.1em 0.25em;">
+			<span style="font-size:1em; display:table;">
+				<span style="font-size:1em; display:table-cell; width:0.2em; height:0.25em; background:#000;"></span>
+				<span style="font-size:1em; display:table-cell; padding-left:0.05em;">
+					<span style="font-size:1em; display:block; margin-bottom:0.05em; width:0.35em; height:0.1em; background:#000;"></span>
+					<span style="font-size:1em; display:block; width:0.35em; height:0.1em; background:#000;"></span>
+				</span>
+			</span>
+		</span>
+	</span>
+</span>
+```
 
-In Outlook.com for example, `border` colors are always left untouched while text `color` or `background-color` are forced to different colors in dark mode.
+The problem with mixing `border` (used for the icon’s outer border) and `background` (used for each individual internal shapes) colors in CSS is that they’re not treated equally when it comes to dark mode. In Outlook.com for example, `border` colors are always left untouched while text `color` or `background-color` are forced to different colors in dark mode.
 
 <figure class="figure">
 <img src="/uploads/2023/03/icon-in-outlook-com.png" alt="" width="768" height="240" />
 <figcaption>A screenshot of the Switch Weekly newsletter viewed in dark mode in Outlook.com.</figcaption>
 </figure>
+
+This is where I thought about using `currentColor`. This CSS keyword “_represents the value of an element's `color` property_” (according to [MDN](https://developer.mozilla.org/en-US/docs/Web/CSS/color_value#currentcolor_keyword)).
+
+```html
+<span style="color:#000; margin-right:0.2em; font-size:1.25em; display:inline-block; vertical-align:middle;" role="presentation">
+	<span style="font-size:1em; display:block; border:0.1em solid; border-radius:0 0 0.1em 0.1em;">
+		<span style="font-size:1em; display:block; padding:0.1em 0.1em 0.25em;">
+			<span style="font-size:1em; display:table;">
+				<span style="font-size:1em; display:table-cell; width:0.2em; height:0.25em; background:currentColor;"></span>
+				<span style="font-size:1em; display:table-cell; padding-left:0.05em;">
+					<span style="font-size:1em; display:block; margin-bottom:0.05em; width:0.35em; height:0.1em; background:currentColor;"></span>
+					<span style="font-size:1em; display:block; width:0.35em; height:0.1em; background:currentColor;"></span>
+				</span>
+			</span>
+		</span>
+	</span>
+</span>
+```
+Final:
+
+```html
+<span style="color:#000; margin-right:0.2em; font-size:1.25em; display:inline-block; vertical-align:middle;" role="presentation">
+	<span style="font-size:1em; display:block; border:0.1em solid; border-radius:0 0 0.1em 0.1em;">
+		<span style="font-size:1em; display:block; padding:0.1em 0.1em 0.25em;">
+			<span style="font-size:1em; display:table;">
+				<span style="font-size:1em; display:table-cell; width:0.2em; border-bottom:0.25em solid;"></span>
+				<span style="font-size:1em; display:table-cell; padding-left:0.05em;">
+					<span style="font-size:1em; display:block; margin-bottom:0.05em; width:0.35em; border-bottom:0.1em solid;"></span>
+					<span style="font-size:1em; display:block; width:0.35em; border-bottom:0.1em solid;"></span>
+				</span>
+			</span>
+		</span>
+	</span>
+</span>
+```
 
 * Using `background` fails as the color changes with no control. We lack a `currentbackgroundcolor` keyword in CSS.
 * Using borders can be a problem as they are not changed in dark mode in Outlook.
