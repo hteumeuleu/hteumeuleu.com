@@ -1,5 +1,5 @@
 ---
-title:  "Samsung Auto-fit"
+title: "Samsung Auto-fit"
 ---
 
 This week, I got bit pretty hard by a bug I somehow managed to completely avoid until now. This bug involves three ingredients: the [Samsung Email](https://play.google.com/store/apps/details?id=com.samsung.android.email.provider) app on Android, its <em>Auto-fit</em> feature, and an Outlook account. Here’s everything I learnt about this.
