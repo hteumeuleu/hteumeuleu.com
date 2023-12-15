@@ -30,13 +30,21 @@ Except that…
 
 A few moments later, I got a reply from my client saying this didn’t fix anything. But how could that be? It did work for Mark after all. Frustrated by the situation, I ordered [a Galaxy A13 from Back Market](https://www.backmarket.com/en-us/search?q=galaxy%20a13) so I could do all the tests I needed.
 
-And now would be a good time to dive deeper into the <em>Samsung Email</em> app.
+While I wait for my order to arrive, it was a good time to dive deeper into the <em>Samsung Email</em> app.
 
 ## Auto-fit
 
+Any Android app is distributed via an `.apk` file format, which is nothing more than a ZIP archive. Which is great, because it means we can snoop through the app to look for anything interesting. So I went to [APKMirror](https://www.apkmirror.com/apk/samsung-electronics-co-ltd/samsung-email/), searched for <em>Samsung Email</em> and downloaded the latest version APK.
+
+As this was mentioned in Mosaico’s post I mentioned earlier, I knew that this whole feature was manager in an `AutoFit.js` file. Which again is great, because it means we can read the source code right away since JavaScript is not a pre-compiled language. So I read it.
+
+And the least I can say is that it is quite… unusual. For example:
+
+* Comments in the code reference specific emails, for example from Yahoo Finance or Youtube, and even mentions specific Gmail accounts used internally by Samsung for their tests. I know not everyone reads JavaScript from unpackaged Android apps as a hobby. But this feels like this shouldn't be there.
+* There are a lots of typos or spelling mistakes in variable names and functions, like `MOBILEDEIVCE` or `orignalDiv`. ([I poked fun at this one](https://mastodon.social/@HTeuMeuLeu/111545725122567328) on Mastodon as “<em>orignal</em>” is french for “<em>moose</em>”.)
+
 * Samsung Auto-Fit algorithm is faulty at best. They look for an image’s `width` attribute first and ignore any style afterwards. Thus forcing a desktop layout.
 * Samsung's autofit script is… terrible. Bad variables and functions naming. Comments related to specific emails and leaking a personal test email address.
-* An APK is just a zip file so we can inspect files within and the Autofit script.
 
 ## Samsung Email with a Hotmail/Outlook Account
 
