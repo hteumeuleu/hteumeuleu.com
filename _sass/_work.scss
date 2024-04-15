@@ -1,5 +1,9 @@
 .page--work {
 
+	.header .title {
+		visibility: hidden;
+	}
+
 	.avatar {
 		float: left;
 		margin-right: rem(16px);

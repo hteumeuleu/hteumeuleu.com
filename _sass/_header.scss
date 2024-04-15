@@ -3,18 +3,19 @@
 	align-items: flex-end;
 	justify-content: space-between;
 	width: 100%;
-	min-height: rem(64px);
+	height: rem(64px);
 	margin-top: rem(32px);
 	margin-bottom: rem(64px);
 }
 
-.logo {
-	width: rem(64px);
-	height: rem(64px);
+.title {
+	align-self: center;
+}
 
-	@media (prefers-color-scheme: dark) {
-		outline: rem(4px) solid #fff;
-	}
+.logo {
+	align-self: center;
+	width: rem(96px);
+	height: rem(96px);
 }
 
 .nav {

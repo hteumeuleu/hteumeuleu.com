@@ -3,7 +3,7 @@ title: Remote HTML Email Developer Rémi Parmentier
 permalink: /work/
 ---
 <div class="post">
-    <img class="avatar" src="/uploads/2022/01/avatar.png" alt="Rémi Parmentier" />
+    <img class="avatar" src="{{ site.url }}/assets/images/avatar.webp" alt="Rémi Parmentier" />
     <p class="oh-hi">
         Oh hi! My name is <strong>Rémi Parmentier</strong> and I’m an…
     </p>
