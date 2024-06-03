@@ -2,7 +2,7 @@
 title: "Announcing Tiny Email Course"
 ---
 
-It’s my pleasure to announce the upcoming launch of my online course site on HTML emails coding. It’s called Tiny Email Course. And it will be, as the name suggests, small courses on very specific email coding topics. The first course will release in June. 🤞
+It’s my pleasure to announce the upcoming launch of my online course site on HTML emails coding. It’s called Tiny Email Course. And it will be, as the name suggests, small courses on very specific email coding topics. The first course will release in <del>June</del> <ins style="text-decoration-style: dashed;">September</ins>. 🤞
 
 I’ve been willing to launch an email course for so many years. But it felt huge and daunting. Email development is such a vast topic. Building one complete course felt impossible to me. For years, I thought about writing a book. I even pitched one to _A Book Apart_ in 2018, but it was unfortunately rejected. (Now that [the publisher is closing](https://abookapart.com/blogs/press/a-new-chapter-for-a-book-apart), I guess I can check that off my bucket list.)
 
